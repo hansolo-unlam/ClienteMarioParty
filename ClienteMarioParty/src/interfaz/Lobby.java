@@ -3,6 +3,7 @@ package interfaz;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.sun.glass.events.WindowEvent;
 
 import cliente.Cliente;
 
@@ -49,7 +51,24 @@ public class Lobby {
 		frame.setResizable(false);
 		frame.setSize(600, 500);
 		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        if (JOptionPane.showConfirmDialog(frame, 
+		            "Queres salor del MarioParty?", "Cerrar lobby?", 
+		            JOptionPane.YES_NO_OPTION,
+		            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+		        	JsonObject jo = new JsonObject();
+					JsonObject jo1 = new JsonObject();
+					jo.addProperty("nombre", "SALIR");
+					jo1.addProperty("", "");
+					jo.add("data", jo1);
+					cliente.escribirMensaje(jo.toString());
+		            System.exit(0);
+		        }
+		    }
+		});
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
