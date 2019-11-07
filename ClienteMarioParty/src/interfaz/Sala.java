@@ -73,6 +73,12 @@ public class Sala {
 		JButton btnComenzarButton = new JButton("Comenzar");
 		btnComenzarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JsonObject jo = new JsonObject();
+				JsonObject jo1 = new JsonObject();
+				jo.addProperty("nombre", "INICIAR_PARTIDA");
+				jo1.addProperty("", "");
+				jo.add("data", jo1);
+				cliente.escribirMensaje(jo.toString());
 				System.out.println("Empezar partida");
 			}
 		});
