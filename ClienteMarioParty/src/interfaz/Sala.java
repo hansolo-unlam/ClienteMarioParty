@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
@@ -34,7 +35,24 @@ public class Sala {
 		frame = new JFrame(nombreSala);
 		frame.setResizable(false);
 		frame.setSize(WIDTH, HEIGHT);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        if (JOptionPane.showConfirmDialog(frame, 
+		            "¿Queres salir de la sala?", "¿Cerrar sala?", 
+		            JOptionPane.YES_NO_OPTION,
+		            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+		        	JsonObject jo = new JsonObject();
+					JsonObject jo1 = new JsonObject();
+					jo.addProperty("nombre", "SALIR_SALA");
+					jo1.addProperty("nombreSala", nombreSala);
+					jo.add("data", jo1);
+					cliente.escribirMensaje(jo.toString());
+					frame.hide();
+		        }
+		    }
+		});
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 

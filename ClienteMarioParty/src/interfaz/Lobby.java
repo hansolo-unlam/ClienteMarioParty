@@ -55,7 +55,7 @@ public class Lobby {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 		        if (JOptionPane.showConfirmDialog(frame, 
-		            "Queres salor del MarioParty?", "Cerrar lobby?", 
+		            "¿Queres salir del MarioParty?", "¿Cerrar lobby?", 
 		            JOptionPane.YES_NO_OPTION,
 		            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
 		        	JsonObject jo = new JsonObject();
@@ -145,7 +145,7 @@ public class Lobby {
 	}
 
 	public static void main(String[] args) {
-		new Lobby("Lobby");
+		new Lobby("Lobby MarioParty");
 	}
 
 }
