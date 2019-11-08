@@ -64,7 +64,7 @@ public class Lobby {
 		jo.addProperty("nombre", "LOGIN");
 		jo1.addProperty("usuario", nombreUser);
 		jo.add("data", jo1);
-		cliente.escribirMensaje(jo.toString());
+		Cliente.escribirMensaje(jo.toString());
 		
 		
 //		MensajeEspera mensajeEspera = new MensajeEspera();
@@ -94,7 +94,7 @@ public class Lobby {
 					jo.addProperty("nombre", "SALIR");
 					jo1.addProperty("usuario",nombreUser);
 					jo.add("data", jo1);
-					cliente.escribirMensaje(jo.toString());
+					Cliente.escribirMensaje(jo.toString());
 					System.exit(0);
 				}
 			}
@@ -137,7 +137,7 @@ public class Lobby {
 				jo1.addProperty("nombreSala", nombre);
 				jo1.addProperty("user", nombreUser);
 				jo.add("data", jo1);
-				cliente.escribirMensaje(jo.toString());
+				Cliente.escribirMensaje(jo.toString());
 				frame.setVisible(false);
 				Sala sala = new Sala(nombre, cliente, nombreUser);
 			}
@@ -186,7 +186,7 @@ public class Lobby {
 					jo1.addProperty("salaSolicitada", nombre);
 					jo1.addProperty("user", nombreUser);
 					jo.add("data", jo1);
-					cliente.escribirMensaje(jo.toString());
+					Cliente.escribirMensaje(jo.toString());
 					
 					//ESPERAR RESPUESTA DEL SERVIDOR - BILELLO
 					frame.setVisible(false);

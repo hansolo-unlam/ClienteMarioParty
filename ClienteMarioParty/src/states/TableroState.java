@@ -5,6 +5,9 @@ import java.awt.Graphics;
 
 import javax.swing.JOptionPane;
 
+import com.google.gson.JsonObject;
+
+import cliente.Cliente;
 import hansolo.mario.Juego;
 import hansolo.marioparty.entidades.Jugador;
 import hansolo.marioparty.graficos.Texturas;
@@ -42,7 +45,7 @@ public class TableroState extends State {
 		this.subEstado = EnumEstadoJuego.TIEMPO_DE_ACCIONES;
 		administradorUI = new AdministradorUI(juego);
 		this.userJugador = this.tieneTurno.getUser();
-		// juego.getMouseManager().settearAdministradorUI(administradorUI);
+		juego.getMouseManager().settearAdministradorUI(administradorUI);
 
 		// esto deberia hacerse cuando se reciba un mensaje que indique que el jugador
 		// tiene el turno
@@ -53,14 +56,19 @@ public class TableroState extends State {
 					public void onClick() {
 						// enviar mensaje al server
 //						tieneTurno.tirarDado();
+						JsonObject jo = new JsonObject();
+						JsonObject jo1 = new JsonObject();
+						jo.addProperty("nombre", "DADO");
+						jo1.addProperty("juego", juego.getId());
+						jo.add("data", jo1);
+						Cliente.escribirMensaje(jo.toString());
 						subEstado = EnumEstadoJuego.VIENDO_DADO;
 
 						new java.util.Timer().schedule(new java.util.TimerTask() {
 							@Override
 							public void run() {
 								subEstado = EnumEstadoJuego.MOVIENDOSE;
-								// mensaje al server
-//								tieneTurno.startAvanzar();
+
 							}
 
 						}, 3000);
@@ -88,27 +96,31 @@ public class TableroState extends State {
 
 		for (Jugador j : juego.getJugadores())
 			j.calcular();
-		// if tengo el turno?
-		if (subEstado == EnumEstadoJuego.TIEMPO_DE_ACCIONES) {
-			administradorUI.getObjetos().get("btnTirarDado").setHidden(false);
-			administradorUI.getObjetos().get("btnTerminarTurno").setHidden(true);
+		if (tieneTurno.getUser().equals(tieneTurno.getMainUser())) {
+			if (subEstado == EnumEstadoJuego.TIEMPO_DE_ACCIONES) {
+				administradorUI.getObjetos().get("btnTirarDado").setHidden(false);
+				administradorUI.getObjetos().get("btnTerminarTurno").setHidden(true);
 
-		} else if (subEstado == EnumEstadoJuego.VIENDO_ITEMS) {
+			} else if (subEstado == EnumEstadoJuego.VIENDO_ITEMS) {
+				administradorUI.getObjetos().get("btnTirarDado").setHidden(true);
+				administradorUI.getObjetos().get("btnTerminarTurno").setHidden(true);
+
+			} else if (subEstado == EnumEstadoJuego.VIENDO_DADO) {
+				administradorUI.getObjetos().get("btnTirarDado").setHidden(true);
+				administradorUI.getObjetos().get("btnTerminarTurno").setHidden(true);
+
+			} else if (subEstado == EnumEstadoJuego.MOVIENDOSE) {
+				administradorUI.getObjetos().get("btnTirarDado").setHidden(true);
+				administradorUI.getObjetos().get("btnTerminarTurno").setHidden(true);
+
+			} else if (subEstado == EnumEstadoJuego.FIN_TURNO) {
+				administradorUI.getObjetos().get("btnTirarDado").setHidden(true);
+				administradorUI.getObjetos().get("btnTerminarTurno").setHidden(false);
+
+			}
+		} else {
 			administradorUI.getObjetos().get("btnTirarDado").setHidden(true);
 			administradorUI.getObjetos().get("btnTerminarTurno").setHidden(true);
-
-		} else if (subEstado == EnumEstadoJuego.VIENDO_DADO) {
-			administradorUI.getObjetos().get("btnTirarDado").setHidden(true);
-			administradorUI.getObjetos().get("btnTerminarTurno").setHidden(true);
-
-		} else if (subEstado == EnumEstadoJuego.MOVIENDOSE) {
-			administradorUI.getObjetos().get("btnTirarDado").setHidden(true);
-			administradorUI.getObjetos().get("btnTerminarTurno").setHidden(true);
-
-		} else if (subEstado == EnumEstadoJuego.FIN_TURNO) {
-			administradorUI.getObjetos().get("btnTirarDado").setHidden(true);
-			administradorUI.getObjetos().get("btnTerminarTurno").setHidden(false);
-
 		}
 	}
 
@@ -128,7 +140,6 @@ public class TableroState extends State {
 		tablero.predibujar(g);
 		tablero.dibujar(g);
 		administradorUI.dibujar(g);
-// dibujar esto cuando recibo mensajes del server
 		for (Jugador j : juego.getJugadores())
 			j.dibujar(g);
 
@@ -180,6 +191,10 @@ public class TableroState extends State {
 
 	public void handleTerminoTurno() {
 		subEstado = EnumEstadoJuego.FIN_TURNO;
+	}
+
+	public Jugador getTieneTurno() {
+		return tieneTurno;
 	}
 
 }

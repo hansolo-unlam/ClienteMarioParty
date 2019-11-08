@@ -89,18 +89,18 @@ public class Paquete {
 			JsonObject jugadores = data.get("jugadores").getAsJsonObject();
 			ArrayList<String> jugadoresEnSala = new ArrayList<String>();
 			for (int i = 0; i < cant; i++) {
-				String jugador = jugadores.get("jugador"+i).getAsString();
+				String jugador = jugadores.get("jugador" + i).getAsString();
 				jugadoresEnSala.add(jugador);
 			}
 			Sala.iniciarPartida(sala, jugadoresEnSala);
 			break;
-			
+
 		case "ESTRELLA":
 			int posicion = data.get("posicion").getAsInt();
 			String juego = data.get("juego").getAsString();
 			Sala.ubicarEstrella(posicion, juego);
 			break;
-			
+
 		case "TURNO":
 			int index = data.get("jugador").getAsInt();
 			juego = data.get("juego").getAsString();
@@ -108,6 +108,19 @@ public class Paquete {
 			Sala.informarTurno(index, juego);
 			break;
 
+		case "POSICION":
+			index = data.get("jugador").getAsInt();
+			int x = data.get("x").getAsInt();
+			int y = data.get("y").getAsInt();
+			juego = data.get("juego").getAsString();
+			
+			break;
+			
+		case "MOVIMIENTOS":
+			cant = data.get("cant").getAsInt();
+			juego = data.get("juego").getAsString();
+			Sala.informarMovimientos(cant, juego);
+			break;
 		/*
 		 * case "ACK_INGRESAR_SALA": Sala sala2 = new Sala(nombre, cliente); break;
 		 */

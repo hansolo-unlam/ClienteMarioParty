@@ -18,7 +18,7 @@ public class Cliente {
 
 	private Socket socket;
 	private DataInputStream in;
-	private DataOutputStream out;
+	private static DataOutputStream out;
 	
 	private boolean mensajeRespondido = false;
 
@@ -44,7 +44,7 @@ public class Cliente {
 		return this.nombre;
 	}
 
-	public void escribirMensaje(String mensaje) {
+	public static void escribirMensaje(String mensaje) {
 		try {
 			out.writeUTF(mensaje);
 		} catch (IOException e) {

@@ -47,13 +47,20 @@ public class Juego implements Runnable {
 	private BufferedImage background;
 	private Tablero tablero = new Tablero("./recursos/map0.txt", this);;
 
-	private static String id;
+	private String id;
+	private String user;
 
-	public Juego(ArrayList<String> users, String id) {
+	public Juego(ArrayList<String> users, String id, String user) {
 		this.id = id;
+		this.user = user;
 		this.ventana = new Ventana();
 		for (int i = 0; i < users.size(); i++) {
-			jugadores.add(new Jugador(i + 1, users.get(i), this));
+			if (users.get(i).equals(user)) {
+				Jugador jugador = new Jugador(i+1, user, this);
+				jugador.setMainUser(user);
+				jugadores.add(jugador);
+			} else
+				jugadores.add(new Jugador(i + 1, users.get(i), this));
 		}
 		mouseManager = new MouseManager();
 		keyManager = new KeyManager();
@@ -144,6 +151,10 @@ public class Juego implements Runnable {
 		}
 
 		stop();
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	private void init() {
@@ -262,4 +273,13 @@ public class Juego implements Runnable {
 
 		tableroState.setTieneTurno(index);
 	}
+
+	public Tablero getTablero() {
+		return tablero;
+	}
+
+	public void informarMovimientos(int cant) {
+		tableroState.getTieneTurno().setCantMovimientos(cant);
+	}
+
 }

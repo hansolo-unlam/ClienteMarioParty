@@ -34,12 +34,22 @@ public class Jugador {
 	private boolean pierdeTurno = false;
 
 	private Juego juego;
+	//esta variable me permite saber si este jugador es el que esta jugando en esta ventana
+	private String mainUser;
+
+	public String getMainUser() {
+		return mainUser;
+	}
+
+	public void setMainUser(String mainUser) {
+		this.mainUser = mainUser;
+	}
 
 	public Jugador(int numero, String user, Juego juego) {
 		this.numero = numero;
-		this.posicion = null;
-		this.x = 0;
-		this.y = 0;
+		this.posicion = juego.getTablero().getStart();
+		this.x = this.posicion.getX();
+		this.y = this.posicion.getY();
 
 		this.monedas = 30;
 		this.estrellas = 0;
@@ -115,6 +125,10 @@ public class Jugador {
 			y--;
 	}
 
+//	public static void settearPosicion(int x1, int y1) {
+//		x=x1;
+//		y=y1;
+//	}
 	private boolean estoyParadoEnMiPosicion() {
 		return this.x == posicion.getX() && this.y == posicion.getY();
 	}

@@ -27,7 +27,7 @@ public class Sala {
 	private static JTextPane textPane = new JTextPane();
 	private JButton btnSalirButton;
 
-	private String nombreUser;
+	private static String nombreUser;
 	private static String nombre;
 
 	private static ArrayList<String> userNames = new ArrayList<String>();
@@ -55,7 +55,7 @@ public class Sala {
 					jo1.addProperty("nombreSala", nombreSala);
 					jo1.addProperty("user", nombreUser);
 					jo.add("data", jo1);
-					cliente.escribirMensaje(jo.toString());
+					Cliente.escribirMensaje(jo.toString());
 					frame.hide();
 					Lobby.setVisible();
 				}
@@ -90,7 +90,7 @@ public class Sala {
 				jo1.addProperty("nombreSala", nombreSala);
 				jo1.addProperty("user", nombreUser);
 				jo.add("data", jo1);
-				cliente.escribirMensaje(jo.toString());
+				Cliente.escribirMensaje(jo.toString());
 				frame.hide();
 				Lobby.setVisible();
 			}
@@ -129,7 +129,7 @@ public class Sala {
 
 	public static void iniciarPartida(String sala, ArrayList<String> jugadoresEnSala) {
 		if (nombre.equals(sala)) {
-			juego = new Juego(jugadoresEnSala, nombre);
+			juego = new Juego(jugadoresEnSala, nombre, nombreUser);
 			juego.start();
 		}
 	}
@@ -144,6 +144,12 @@ public class Sala {
 		if (juegoId.equals(nombre)) {
 				juego.informarTurno(index);
 		}
+	}
+
+	public static void informarMovimientos(int cant, String juegoId) {
+		if (juegoId.equals(nombre)) {
+			juego.informarMovimientos(cant);
+	}
 	}
 
 }
