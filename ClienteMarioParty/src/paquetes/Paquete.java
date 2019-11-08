@@ -1,6 +1,7 @@
 package paquetes;
 
 import java.net.Socket;
+import java.util.ArrayList;
 
 import com.google.gson.JsonObject;
 
@@ -33,7 +34,7 @@ public class Paquete {
 		data = jsonObject.get("data").getAsJsonObject();
 
 		switch (cabecera) {
-		
+
 		case "SALA_CREADA":
 			String salaCreada = data.get("salaCreada").getAsString();
 			Lobby.agregarSala(salaCreada);
@@ -44,6 +45,17 @@ public class Paquete {
 			Lobby.eliminarSala(salaEliminada);
 			break;
 
+		case "NUEVO_USUARIO":
+			int cant = data.get("cant").getAsInt();
+			ArrayList<String> salasNombres = new ArrayList<String>();
+			//cargo un arraylist con las salas previas y seteo la lista del lobby
+			for (int i = 0; i < cant; i++) {
+				String sala = data.get("sala" + i).getAsString();
+				salasNombres.add(sala);
+			}
+
+			Lobby.setSalasNombres(salasNombres);
+			break;
 		}
 	}
 }

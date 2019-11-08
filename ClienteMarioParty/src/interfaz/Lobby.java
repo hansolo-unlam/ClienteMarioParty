@@ -167,6 +167,11 @@ public class Lobby {
 
 	}
 
+	public static void setSalasNombres(ArrayList<String> salasNombres) {
+		Lobby.salasNombres = salasNombres;
+		dibujarBotonesSalas(salasNombres);
+	}
+
 	public static void main(String[] args) {
 		new Lobby("Lobby MarioParty");
 	}
@@ -177,5 +182,6 @@ public class Lobby {
 		dibujarBotonesSalas(salasNombres);
 
 	}
+
 
 }
