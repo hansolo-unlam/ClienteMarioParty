@@ -29,8 +29,8 @@ public class Cliente {
 			socket = new Socket(HOST, PUERTO);
 			System.out.println("Se conecto " + nombre);
 			//creo un hilo para escuchar al server
-			//ThreadEscucha escucha = new ThreadEscucha(socket);
-			//escucha.start();
+			ThreadEscucha escucha = new ThreadEscucha(socket);
+			escucha.start();
 			out = new DataOutputStream(socket.getOutputStream());
 			in = new DataInputStream(socket.getInputStream());
 
@@ -66,11 +66,6 @@ public class Cliente {
 			JsonParser parser = new JsonParser();
 			JsonObject gsonArr = parser.parse(mensajeRecibido).getAsJsonObject();
 			Paquete paquete = new Paquete(gsonArr, socket);
-			
-
-			/*Gson gson = new Gson();
-
-			Paquete inputPaquete = gson.fromJson(mensajeRecibido, Paquete.class);*/
 
 		} catch (IOException e) {
 			return false;

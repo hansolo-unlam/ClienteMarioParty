@@ -3,6 +3,7 @@ package interfaz;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,13 +23,19 @@ public class Sala {
 	private int HEIGHT = 310;
 
 	private JLabel lblJugadores;
-	private JTextPane textPane;
+	private static JTextPane textPane = new JTextPane();
 	private JButton btnSalirButton;
-	
 
-	public Sala(String nombre, Cliente cliente) {
+	private String nombreUser;
+	private static String nombre;
+
+	private static ArrayList<String> userNames = new ArrayList<String>();
+
+	public Sala(String nombre, Cliente cliente, String userName) {
+		this.nombreUser = userName;
+		this.nombre = nombre;
 		init(nombre, cliente);
-		
+
 	}
 
 	private void init(String nombreSala, Cliente cliente) {
@@ -36,23 +43,22 @@ public class Sala {
 		frame.setResizable(false);
 		frame.setSize(WIDTH, HEIGHT);
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
-		    @Override
-		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		        if (JOptionPane.showConfirmDialog(frame, 
-		            "¿Queres salir de la sala?", "¿Cerrar sala?", 
-		            JOptionPane.YES_NO_OPTION,
-		            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-		        	JsonObject jo = new JsonObject();
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+				if (JOptionPane.showConfirmDialog(frame, "¿Queres salir de la sala?", "¿Cerrar sala?",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+					JsonObject jo = new JsonObject();
 					JsonObject jo1 = new JsonObject();
 					jo.addProperty("nombre", "SALIR_SALA");
 					jo1.addProperty("nombreSala", nombreSala);
+					jo1.addProperty("user", nombreUser);
 					jo.add("data", jo1);
 					cliente.escribirMensaje(jo.toString());
 					frame.hide();
-		        }
-		    }
+				}
+			}
 		});
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 
@@ -66,7 +72,6 @@ public class Sala {
 
 		frame.add(lblJugadores);
 
-		textPane = new JTextPane();
 		textPane.setBounds(41, 52, 138, 198);
 		textPane.setEditable(false);
 
@@ -80,6 +85,7 @@ public class Sala {
 				JsonObject jo1 = new JsonObject();
 				jo.addProperty("nombre", "SALIR_SALA");
 				jo1.addProperty("nombreSala", nombreSala);
+				jo1.addProperty("user", nombreUser);
 				jo.add("data", jo1);
 				cliente.escribirMensaje(jo.toString());
 				frame.hide();
@@ -105,5 +111,15 @@ public class Sala {
 		frame.setVisible(true);
 	}
 
+	public static void setUserNames(String sala, ArrayList<String> usersEnSala) {
+		if (sala.equalsIgnoreCase(nombre)) {
+			userNames = usersEnSala;
+			String texto = "";
+			for (String user : userNames) {
+				texto = texto + user + "\n" + "\n";
+			}
+			textPane.setText(texto);
+		}
+	}
 
 }

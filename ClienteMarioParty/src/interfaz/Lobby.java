@@ -30,7 +30,7 @@ public class Lobby {
 	private static int desplazamientoX = 0;
 
 	private JButton btnCrearSala;
-	private static JFrame frame = new JFrame();;
+	private static JFrame frame = new JFrame("Lobby MarioParty");;
 	private static JPanel contentPane = new JPanel();;
 
 	private JLabel lblJugadores;
@@ -43,6 +43,7 @@ public class Lobby {
 	private static ArrayList<String> userNames = new ArrayList<String>();
 
 	private static String nombreUser;
+	
 	public static void setUserNames(ArrayList<String> users) {
 		userNames = users;
 		String texto = "";
@@ -66,11 +67,11 @@ public class Lobby {
 		cliente.escribirMensaje(jo.toString());
 		
 		
-		MensajeEspera mensajeEspera = new MensajeEspera();
-		mensajeEspera.setVisible(true);
-		new Thread(mensajeEspera).start();
-		cliente.esperarRespuesta();
-		mensajeEspera.stop();
+//		MensajeEspera mensajeEspera = new MensajeEspera();
+//		mensajeEspera.setVisible(true);
+//		new Thread(mensajeEspera).start();
+//		cliente.esperarRespuesta();
+//		mensajeEspera.stop();
 		
 		//PERMITE INGRESAR AUNQUE NO TENGA PERMISO
 		//ESPERAR RESPUESTA DEL SERVIDOR - BILELLO
@@ -134,9 +135,10 @@ public class Lobby {
 				JsonObject jo1 = new JsonObject();
 				jo.addProperty("nombre", "NUEVA_SALA");
 				jo1.addProperty("nombreSala", nombre);
+				jo1.addProperty("user", nombreUser);
 				jo.add("data", jo1);
 				cliente.escribirMensaje(jo.toString());
-				Sala sala = new Sala(nombre, cliente);
+				Sala sala = new Sala(nombre, cliente, nombreUser);
 			}
 
 		});
@@ -181,12 +183,13 @@ public class Lobby {
 					JsonObject jo1 = new JsonObject();
 					jo.addProperty("nombre", "INGRESAR_SALA");
 					jo1.addProperty("salaSolicitada", nombre);
+					jo1.addProperty("user", nombreUser);
 					jo.add("data", jo1);
 					cliente.escribirMensaje(jo.toString());
 					
 					//ESPERAR RESPUESTA DEL SERVIDOR - BILELLO
 					
-					Sala sala2 = new Sala(nombre, cliente);
+					Sala sala2 = new Sala(nombre, cliente, nombreUser);
 				}
 			});
 

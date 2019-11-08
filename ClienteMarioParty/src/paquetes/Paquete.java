@@ -70,6 +70,21 @@ public class Paquete {
 			Lobby.setUserNames(users);
 			break;
 			
+		case "USERS_EN_SALA":
+			int cantUS = data.get("cant").getAsInt();
+			String sala = data.get("sala").getAsString();
+			ArrayList<String> usersEnSala = new ArrayList<String>();
+			for (int i = 0; i < cantUS; i++) {
+				String user = data.get("user" + i).getAsString();
+				usersEnSala.add(user);
+			}
+			Sala.setUserNames(sala, usersEnSala);
+			break;
+		case "INICIO_PARTIDA":
+			String mensaje = data.get("mensaje").getAsString();
+			System.out.println(mensaje);;
+			break;
+			
 		/*case "ACK_INGRESAR_SALA":
 			Sala sala2 = new Sala(nombre, cliente);
 			break;*/
