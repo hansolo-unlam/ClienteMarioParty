@@ -18,7 +18,7 @@ import cliente.Cliente;
 
 public class Sala {
 
-	private JFrame frame;
+	private static JFrame frame;
 	private int WIDTH = 410;
 	private int HEIGHT = 310;
 
@@ -119,7 +119,15 @@ public class Sala {
 				texto = texto + user + "\n" + "\n";
 			}
 			textPane.setText(texto);
+			frame.repaint();
 		}
+	}
+
+	public static void iniciarPartida(String sala) {
+//		if (!nombre.equals(sala)) {
+//			return;
+//		}
+//		System.out.println("empieza la partida");
 	}
 
 }

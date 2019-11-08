@@ -59,10 +59,10 @@ public class Paquete {
 			break;
 			
 		case "USERS_CONECTADOS":
-			int cantU = data.get("cant").getAsInt();
+			cant = data.get("cant").getAsInt();
 			ArrayList<String> users = new ArrayList<String>();
 			//cargo un arraylist con las salas previas y seteo la lista del lobby
-			for (int i = 0; i < cantU; i++) {
+			for (int i = 0; i < cant; i++) {
 				String user = data.get("user" + i).getAsString();
 				users.add(user);
 			}
@@ -71,18 +71,18 @@ public class Paquete {
 			break;
 			
 		case "USERS_EN_SALA":
-			int cantUS = data.get("cant").getAsInt();
+			cant = data.get("cant").getAsInt();
 			String sala = data.get("sala").getAsString();
 			ArrayList<String> usersEnSala = new ArrayList<String>();
-			for (int i = 0; i < cantUS; i++) {
+			for (int i = 0; i < cant; i++) {
 				String user = data.get("user" + i).getAsString();
 				usersEnSala.add(user);
 			}
 			Sala.setUserNames(sala, usersEnSala);
 			break;
 		case "INICIO_PARTIDA":
-			String mensaje = data.get("mensaje").getAsString();
-			System.out.println(mensaje);;
+			sala = data.get("sala").getAsString();
+			Sala.iniciarPartida(sala);
 			break;
 			
 		/*case "ACK_INGRESAR_SALA":
