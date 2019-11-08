@@ -56,29 +56,29 @@ public class Jugador {
 	public void calcular() {
 		// si el jugador esta parado en el [x,y] de su casillero y le quedan
 		// movimientos,
-		if (estoyParadoEnMiPosicion() && avanzando) {// cantMovimientos != 0) {
-			cantMovimientos--;
-
-			if (posicion.isEfectoPasandoSobre())
-				juego.getJuegoState().activarEfectoCasillero();
-
-			if (cantMovimientos == 0) {
-				// Antes de terminar el turno, debería ejecutar el efecto del casillero en donde
-				// terminé
-				juego.getJuegoState().activarEfectoCasillero();
-				avanzando = false;
-
-				juego.pasarTurno();
-				// System.out.println("ACÁ DEBERÍA TERMINAR EL TURNO");
-			} else {
-				posicion = posicion.getSiguiente().getCasillero();
-			}
-
-			// si no estoy parado en mi posicion y me quedan movimientos, tengo que ir hacia
-			// mi posicion
-		} else if (!estoyParadoEnMiPosicion() && avanzando) { // cantMovimientos != 0) {
-			avanzarHaciaPosicion();
-		}
+//		if (estoyParadoEnMiPosicion() && avanzando) {// cantMovimientos != 0) {
+//			cantMovimientos--;
+//
+//			if (posicion.isEfectoPasandoSobre())
+//				juego.getJuegoState().activarEfectoCasillero();
+//
+//			if (cantMovimientos == 0) {
+//				// Antes de terminar el turno, debería ejecutar el efecto del casillero en donde
+//				// terminé
+//				juego.getJuegoState().activarEfectoCasillero();
+//				avanzando = false;
+//
+//				juego.pasarTurno();
+//				// System.out.println("ACÁ DEBERÍA TERMINAR EL TURNO");
+//			} else {
+//				posicion = posicion.getSiguiente().getCasillero();
+//			}
+//
+//			// si no estoy parado en mi posicion y me quedan movimientos, tengo que ir hacia
+//			// mi posicion
+//		} else if (!estoyParadoEnMiPosicion() && avanzando) { // cantMovimientos != 0) {
+//			avanzarHaciaPosicion();
+//		}
 	}
 
 	public void dibujar(Graphics g) {

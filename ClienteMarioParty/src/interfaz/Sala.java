@@ -31,6 +31,7 @@ public class Sala {
 	private static String nombre;
 
 	private static ArrayList<String> userNames = new ArrayList<String>();
+	private static Juego juego;
 
 	public Sala(String nombre, Cliente cliente, String userName) {
 		this.nombreUser = userName;
@@ -128,8 +129,14 @@ public class Sala {
 
 	public static void iniciarPartida(String sala, ArrayList<String> jugadoresEnSala) {
 		if (nombre.equals(sala)) {
-			Juego juego = new Juego(jugadoresEnSala);
+			juego = new Juego(jugadoresEnSala, nombre);
 			juego.start();
+		}
+	}
+
+	public static void ubicarEstrella(int posicion, String juegoId) {
+		if (juegoId.equals(nombre)) {
+				juego.ubicarEstrella(posicion);
 		}
 	}
 

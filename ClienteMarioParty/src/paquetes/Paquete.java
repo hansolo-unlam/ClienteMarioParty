@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import com.google.gson.JsonObject;
 
+import hansolo.mario.Juego;
+import hansolo.marioparty.tablero.Tablero;
 import interfaz.Lobby;
 import interfaz.Sala;
 
@@ -91,6 +93,12 @@ public class Paquete {
 				jugadoresEnSala.add(jugador);
 			}
 			Sala.iniciarPartida(sala, jugadoresEnSala);
+			break;
+			
+		case "ESTRELLA":
+			int posicion = data.get("posicion").getAsInt();
+			String juego = data.get("juego").getAsString();
+			Sala.ubicarEstrella(posicion, juego);
 			break;
 
 		/*

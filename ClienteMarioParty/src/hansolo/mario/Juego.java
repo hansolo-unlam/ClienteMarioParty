@@ -12,6 +12,7 @@ import states.*;
 import hansolo.marioparty.entidades.Jugador;
 import hansolo.marioparty.graficos.*;
 import hansolo.marioparty.input.MouseManager;
+import hansolo.marioparty.tablero.Tablero;
 import hansolo.marioparty.input.KeyManager;
 import states.MinijuegoState;
 import states.TableroState;
@@ -29,7 +30,7 @@ public class Juego implements Runnable {
 
 	// estados
 	// private MenuState menuState;
-	private TableroState tableroState;
+	private static TableroState tableroState;
 	private MinijuegoState minijuegoState;
 
 	// cuando tengamos mas minijuegos se cargarian en el vector
@@ -45,8 +46,12 @@ public class Juego implements Runnable {
 	private Graphics g;
 
 	private BufferedImage background;
+	private Tablero tablero = new Tablero("./recursos/map0.txt", this);;
+	
+	private static String id;
 
-	public Juego(ArrayList<String> users) {
+	public Juego(ArrayList<String> users, String id) {
+		this.id = id;
 		this.ventana = new Ventana();
 		for (int i = 0; i<users.size();i++) {
 			jugadores.add(new Jugador(i+1, users.get(i), this));
@@ -158,8 +163,10 @@ public class Juego implements Runnable {
 		// cargo las texturas
 		Texturas.init();
 
+		
+		
 		// inicializo los estados
-		tableroState = new TableroState(this);
+		tableroState = new TableroState(this, tablero);
 		minijuegoState = new MinijuegoState(this);
 		// minijuegos[0] = new JuegoDados(this);
 
@@ -246,5 +253,12 @@ public class Juego implements Runnable {
 
 	public void setJuegoState(TableroState tableroState) {
 		this.tableroState = tableroState;
+	}
+
+	public  void ubicarEstrella(int posicion) {
+	
+			tablero.ubicarEstrella(posicion);
+		
+		
 	}
 }

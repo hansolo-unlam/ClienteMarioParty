@@ -16,6 +16,10 @@ import hansolo.marioparty.ui.ImageButton;
 
 public class TableroState extends State {
 	private Tablero tablero;
+	public Tablero getTablero() {
+		return tablero;
+	}
+
 	private Jugador tieneTurno;
 	private int ronda = 1;
 	String userJugador; 
@@ -23,10 +27,11 @@ public class TableroState extends State {
 
 	private EnumEstadoJuego subEstado;
 
-	public TableroState(Juego juego) {
+	public TableroState(Juego juego, Tablero tablero) {
 		super(juego);
+		this.tablero = tablero;
 
-		tablero = new Tablero("./recursos/map0.txt", juego);
+		
 		//this.tieneTurno = juego.getJugadores().get(0);
 		this.subEstado = EnumEstadoJuego.TIEMPO_DE_ACCIONES;
 		administradorUI = new AdministradorUI(juego);
