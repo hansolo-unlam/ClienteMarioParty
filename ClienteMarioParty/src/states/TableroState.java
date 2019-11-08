@@ -30,6 +30,7 @@ public class TableroState extends State {
 
 		this.tieneTurno = juego.getJugadores().get(tieneTurno);
 		this.userJugador = this.tieneTurno.getUser();
+		this.subEstado = EnumEstadoJuego.TIEMPO_DE_ACCIONES;
 	}
 
 	String userJugador;
@@ -86,8 +87,12 @@ public class TableroState extends State {
 
 					@Override
 					public void onClick() {
-						// enviar mensaje
-						// pasarTurno();
+						JsonObject jo = new JsonObject();
+						JsonObject jo1 = new JsonObject();
+						jo.addProperty("nombre", "PASAR_TURNO");
+						jo1.addProperty("juego", juego.getId());
+						jo.add("data", jo1);
+						Cliente.escribirMensaje(jo.toString());
 					}
 
 				}));
@@ -99,6 +104,7 @@ public class TableroState extends State {
 		tablero.calcular();
 		administradorUI.calcular();
 
+		
 		for (Jugador j : juego.getJugadores())
 			j.calcular();
 		if (tieneTurno.getUser().equals(tieneTurno.getMainUser())) {
