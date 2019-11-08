@@ -68,7 +68,7 @@ public class TableroState extends State {
 							@Override
 							public void run() {
 								subEstado = EnumEstadoJuego.MOVIENDOSE;
-
+								tieneTurno.startAvanzar();
 							}
 
 						}, 3000);
