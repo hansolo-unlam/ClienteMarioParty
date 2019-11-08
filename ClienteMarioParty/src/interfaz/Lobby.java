@@ -29,16 +29,26 @@ public class Lobby {
 	private static int desplazamientoX = 0;
 
 	private JButton btnCrearSala;
-	private static JFrame frame;
-	private static JPanel contentPane;
+	private static JFrame frame = new JFrame();;
+	private static JPanel contentPane = new JPanel();;
 
 	private JLabel lblJugadores;
 	private JLabel lblSalas;
-	private JTextPane textPane;
+	private static JTextPane textPane = new JTextPane();;
 
 	private static Cliente cliente;
 
 	private static ArrayList<String> salasNombres = new ArrayList<String>();
+	private static ArrayList<String> userNames = new ArrayList<String>();
+
+	public static void setUserNames(ArrayList<String> users) {
+		userNames = users;
+		String texto = "";
+		for (String user : userNames) {
+			texto = texto + user + "\n" + "\n";
+		}
+		textPane.setText(texto);
+	}
 
 	private int cantSalas = 0;
 
@@ -46,11 +56,17 @@ public class Lobby {
 		String nombreUser = JOptionPane.showInputDialog("Ingresar nombre");
 
 		this.cliente = new Cliente(nombreUser);
+		JsonObject jo = new JsonObject();
+		JsonObject jo1 = new JsonObject();
+		jo.addProperty("nombre", "LOGIN");
+		jo1.addProperty("usuario", nombreUser);
+		jo.add("data", jo1);
+		cliente.escribirMensaje(jo.toString());
 		init(nombre);
 	}
 
 	private void init(String nombre) {
-		frame = new JFrame(nombre);
+		frame.setName(nombre);
 		frame.setResizable(false);
 		frame.setSize(600, 500);
 		frame.setLocationRelativeTo(null);
@@ -71,7 +87,7 @@ public class Lobby {
 			}
 		});
 
-		contentPane = new JPanel();
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		frame.setContentPane(contentPane);
@@ -91,7 +107,7 @@ public class Lobby {
 
 		contentPane.add(lblSalas);
 
-		textPane = new JTextPane();
+		
 		textPane.setBounds(25, 52, 180, 400);
 		textPane.setEditable(false);
 

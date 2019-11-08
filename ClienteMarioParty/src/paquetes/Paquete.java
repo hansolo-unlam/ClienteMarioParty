@@ -45,7 +45,7 @@ public class Paquete {
 			Lobby.eliminarSala(salaEliminada);
 			break;
 
-		case "NUEVO_USUARIO":
+		case "SALAS_PREVIAS":
 			int cant = data.get("cant").getAsInt();
 			ArrayList<String> salasNombres = new ArrayList<String>();
 			//cargo un arraylist con las salas previas y seteo la lista del lobby
@@ -55,6 +55,18 @@ public class Paquete {
 			}
 
 			Lobby.setSalasNombres(salasNombres);
+			break;
+			
+		case "USERS_CONECTADOS":
+			int cantU = data.get("cant").getAsInt();
+			ArrayList<String> users = new ArrayList<String>();
+			//cargo un arraylist con las salas previas y seteo la lista del lobby
+			for (int i = 0; i < cantU; i++) {
+				String user = data.get("user" + i).getAsString();
+				users.add(user);
+			}
+
+			Lobby.setUserNames(users);
 			break;
 		}
 	}

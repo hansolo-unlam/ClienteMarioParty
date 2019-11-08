@@ -44,18 +44,6 @@ public class Cliente {
 		}
 	}
 
-//	public boolean isClosed() {
-//		return socket.isClosed();
-//	}
-
-//	public String recibirMensaje() {
-//		try {
-//			return in.readUTF();
-//		} catch (IOException e) {
-//			System.out.println("No se pudo recibir el mensaje");
-//		}
-//		return "";
-//	}
 
 	public void cerrarSocket() {
 		try {
