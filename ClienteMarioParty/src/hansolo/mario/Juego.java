@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import states.*;
 import hansolo.marioparty.entidades.Jugador;
 import hansolo.marioparty.graficos.*;
@@ -30,16 +29,16 @@ public class Juego implements Runnable {
 
 	// estados
 	// private MenuState menuState;
-	private static TableroState tableroState;
+	private TableroState tableroState;
 	private MinijuegoState minijuegoState;
 
 	// cuando tengamos mas minijuegos se cargarian en el vector
-	//private Minijuego[] minijuegos = new Minijuego[1];
+	// private Minijuego[] minijuegos = new Minijuego[1];
 
 	// input
 	private MouseManager mouseManager;
 	private KeyManager keyManager;
-	
+
 	private List<Jugador> jugadores = new ArrayList<Jugador>();
 	// Gráficos
 	private BufferStrategy bs;
@@ -47,15 +46,15 @@ public class Juego implements Runnable {
 
 	private BufferedImage background;
 	private Tablero tablero = new Tablero("./recursos/map0.txt", this);;
-	
+
 	private static String id;
 
 	public Juego(ArrayList<String> users, String id) {
 		this.id = id;
 		this.ventana = new Ventana();
-		for (int i = 0; i<users.size();i++) {
-			jugadores.add(new Jugador(i+1, users.get(i), this));
-		}		
+		for (int i = 0; i < users.size(); i++) {
+			jugadores.add(new Jugador(i + 1, users.get(i), this));
+		}
 		mouseManager = new MouseManager();
 		keyManager = new KeyManager();
 
@@ -130,7 +129,7 @@ public class Juego implements Runnable {
 				calcular();
 
 				// dibuja el juego
-				 dibujar();
+				dibujar();
 
 				ticks++;
 				delta--;
@@ -150,7 +149,7 @@ public class Juego implements Runnable {
 	private void init() {
 
 		// creo la ventana
-		//ventana = new Ventana(title, width, height);
+		// ventana = new Ventana(title, width, height);
 		background = ImageLoader.cargarImagen("recursos/texturas/background/background5.png");
 		// agrego los keyListener a la ventana
 		ventana.getFrame().addKeyListener(keyManager);
@@ -163,8 +162,6 @@ public class Juego implements Runnable {
 		// cargo las texturas
 		Texturas.init();
 
-		
-		
 		// inicializo los estados
 		tableroState = new TableroState(this, tablero);
 		minijuegoState = new MinijuegoState(this);
@@ -174,7 +171,7 @@ public class Juego implements Runnable {
 	}
 
 	private void calcular() {
-		
+
 		keyManager.calcular();
 
 		if (State.getState() != null)
@@ -255,10 +252,14 @@ public class Juego implements Runnable {
 		this.tableroState = tableroState;
 	}
 
-	public  void ubicarEstrella(int posicion) {
-	
-			tablero.ubicarEstrella(posicion);
-		
-		
+	public void ubicarEstrella(int posicion) {
+
+		tablero.ubicarEstrella(posicion);
+
+	}
+
+	public void informarTurno(int index) {
+
+		tableroState.setTieneTurno(index);
 	}
 }

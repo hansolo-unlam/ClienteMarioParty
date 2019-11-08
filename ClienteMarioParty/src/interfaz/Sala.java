@@ -139,5 +139,11 @@ public class Sala {
 				juego.ubicarEstrella(posicion);
 		}
 	}
+	
+	public static void informarTurno(int index, String juegoId) {
+		if (juegoId.equals(nombre)) {
+				juego.informarTurno(index);
+		}
+	}
 
 }

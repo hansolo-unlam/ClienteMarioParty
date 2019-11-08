@@ -100,6 +100,13 @@ public class Paquete {
 			String juego = data.get("juego").getAsString();
 			Sala.ubicarEstrella(posicion, juego);
 			break;
+			
+		case "TURNO":
+			int index = data.get("jugador").getAsInt();
+			juego = data.get("juego").getAsString();
+			System.out.println("tiene turno");
+			Sala.informarTurno(index, juego);
+			break;
 
 		/*
 		 * case "ACK_INGRESAR_SALA": Sala sala2 = new Sala(nombre, cliente); break;
