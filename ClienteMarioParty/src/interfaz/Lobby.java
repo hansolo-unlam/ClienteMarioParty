@@ -41,6 +41,7 @@ public class Lobby {
 	private static ArrayList<String> salasNombres = new ArrayList<String>();
 	private static ArrayList<String> userNames = new ArrayList<String>();
 
+	private static String nombreUser;
 	public static void setUserNames(ArrayList<String> users) {
 		userNames = users;
 		String texto = "";
@@ -53,7 +54,7 @@ public class Lobby {
 	private int cantSalas = 0;
 
 	public Lobby(String nombre) {
-		String nombreUser = JOptionPane.showInputDialog("Ingresar nombre");
+		nombreUser = JOptionPane.showInputDialog("Ingresar nombre");
 
 		this.cliente = new Cliente(nombreUser);
 		JsonObject jo = new JsonObject();
@@ -79,7 +80,7 @@ public class Lobby {
 					JsonObject jo = new JsonObject();
 					JsonObject jo1 = new JsonObject();
 					jo.addProperty("nombre", "SALIR");
-					jo1.addProperty("", "");
+					jo1.addProperty("usuario",nombreUser);
 					jo.add("data", jo1);
 					cliente.escribirMensaje(jo.toString());
 					System.exit(0);
