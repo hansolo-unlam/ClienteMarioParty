@@ -121,6 +121,11 @@ public class Paquete {
 			juego = data.get("juego").getAsString();
 			Sala.informarMovimientos(cant, juego);
 			break;
+			
+		case "AVANZAR":
+			juego = data.get("juego").getAsString();
+			Sala.informarAvanzar(juego);
+			break;
 		/*
 		 * case "ACK_INGRESAR_SALA": Sala sala2 = new Sala(nombre, cliente); break;
 		 */

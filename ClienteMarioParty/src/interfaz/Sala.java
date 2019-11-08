@@ -152,4 +152,11 @@ public class Sala {
 	}
 	}
 
+	public static void informarAvanzar(String juegoId) {
+		if (juegoId.equals(nombre)) {
+			juego.informarAvanzar();
+	}
+		
+	}
+
 }

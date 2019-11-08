@@ -139,10 +139,10 @@ public class Jugador {
 	 * 
 	 * @return int número que salió en el dado
 	 */
-	public void tirarDado() {
-		// mensaje al server
-		// cantMovimientos = DadoSimple.tirar();
-	}
+//	public void tirarDado() {
+//		// mensaje al server
+//		// cantMovimientos = DadoSimple.tirar();
+//	}
 
 	public void startAvanzar() {
 		// Setteo la posición siguiente y lo hago avanzar un pixel así no entra en el

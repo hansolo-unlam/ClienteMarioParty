@@ -68,7 +68,12 @@ public class TableroState extends State {
 							@Override
 							public void run() {
 								subEstado = EnumEstadoJuego.MOVIENDOSE;
-								tieneTurno.startAvanzar();
+								JsonObject jo = new JsonObject();
+								JsonObject jo1 = new JsonObject();
+								jo.addProperty("nombre", "AVANZAR");
+								jo1.addProperty("juego", juego.getId());
+								jo.add("data", jo1);
+								Cliente.escribirMensaje(jo.toString());
 							}
 
 						}, 3000);
@@ -143,17 +148,20 @@ public class TableroState extends State {
 		for (Jugador j : juego.getJugadores())
 			j.dibujar(g);
 
-//		if (subEstado == EnumEstadoJuego.TIEMPO_DE_ACCIONES) {
-//
-//		} else if (subEstado == EnumEstadoJuego.VIENDO_ITEMS) {
-//
-//		} else if (subEstado == EnumEstadoJuego.VIENDO_DADO) {
-//			g.drawString(userJugador + ": sacaste un " + tieneTurno.getCantMovimientos() + " en el dado.", 100, 750);
-//		} else if (subEstado == EnumEstadoJuego.MOVIENDOSE) {
-//			g.drawString("a " + userJugador + " le quedan " + tieneTurno.getCantMovimientos() + " movimientos.", 100,
-//					750);
-//
-//		}
+		if (tieneTurno.getUser().equals(tieneTurno.getMainUser())) {
+			if (subEstado == EnumEstadoJuego.TIEMPO_DE_ACCIONES) {
+
+			} else if (subEstado == EnumEstadoJuego.VIENDO_ITEMS) {
+
+			} else if (subEstado == EnumEstadoJuego.VIENDO_DADO) {
+				g.drawString(userJugador + ": sacaste un " + tieneTurno.getCantMovimientos() + " en el dado.", 100,
+						750);
+			} else if (subEstado == EnumEstadoJuego.MOVIENDOSE) {
+				g.drawString("a " + userJugador + " le quedan " + tieneTurno.getCantMovimientos() + " movimientos.",
+						100, 750);
+
+			}
+		}
 	}
 
 	public void activarEfectoCasillero() {

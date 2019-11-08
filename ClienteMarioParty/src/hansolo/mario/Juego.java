@@ -282,4 +282,8 @@ public class Juego implements Runnable {
 		tableroState.getTieneTurno().setCantMovimientos(cant);
 	}
 
+	public void informarAvanzar() {
+		tableroState.getTieneTurno().startAvanzar();
+	}
+
 }
