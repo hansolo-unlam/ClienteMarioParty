@@ -49,7 +49,7 @@ public class Paquete {
 		case "SALAS_PREVIAS":
 			int cant = data.get("cant").getAsInt();
 			ArrayList<String> salasNombres = new ArrayList<String>();
-			//cargo un arraylist con las salas previas y seteo la lista del lobby
+			// cargo un arraylist con las salas previas y seteo la lista del lobby
 			for (int i = 0; i < cant; i++) {
 				String sala = data.get("sala" + i).getAsString();
 				salasNombres.add(sala);
@@ -57,11 +57,11 @@ public class Paquete {
 
 			Lobby.setSalasNombres(salasNombres);
 			break;
-			
+
 		case "USERS_CONECTADOS":
 			cant = data.get("cant").getAsInt();
 			ArrayList<String> users = new ArrayList<String>();
-			//cargo un arraylist con las salas previas y seteo la lista del lobby
+			// cargo un arraylist con las salas previas y seteo la lista del lobby
 			for (int i = 0; i < cant; i++) {
 				String user = data.get("user" + i).getAsString();
 				users.add(user);
@@ -69,7 +69,7 @@ public class Paquete {
 
 			Lobby.setUserNames(users);
 			break;
-			
+
 		case "USERS_EN_SALA":
 			cant = data.get("cant").getAsInt();
 			String sala = data.get("sala").getAsString();
@@ -80,16 +80,23 @@ public class Paquete {
 			}
 			Sala.setUserNames(sala, usersEnSala);
 			break;
+
 		case "INICIO_PARTIDA":
 			sala = data.get("sala").getAsString();
-			Sala.iniciarPartida(sala);
+			cant = data.get("cant").getAsInt();
+			JsonObject jugadores = data.get("jugadores").getAsJsonObject();
+			ArrayList<String> jugadoresEnSala = new ArrayList<String>();
+			for (int i = 0; i < cant; i++) {
+				String jugador = jugadores.get("jugador"+i).getAsString();
+				jugadoresEnSala.add(jugador);
+			}
+			Sala.iniciarPartida(sala, jugadoresEnSala);
 			break;
-			
-		/*case "ACK_INGRESAR_SALA":
-			Sala sala2 = new Sala(nombre, cliente);
-			break;*/
+
+		/*
+		 * case "ACK_INGRESAR_SALA": Sala sala2 = new Sala(nombre, cliente); break;
+		 */
 		}
-		
-		
+
 	}
 }

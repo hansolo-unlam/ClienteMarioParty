@@ -15,10 +15,11 @@ import javax.swing.SwingConstants;
 import com.google.gson.JsonObject;
 
 import cliente.Cliente;
+import hansolo.mario.Juego;
 
 public class Sala {
 
-	private static JFrame frame;
+	private static JFrame frame = new JFrame();
 	private int WIDTH = 410;
 	private int HEIGHT = 310;
 
@@ -55,6 +56,7 @@ public class Sala {
 					jo.add("data", jo1);
 					cliente.escribirMensaje(jo.toString());
 					frame.hide();
+					Lobby.setVisible();
 				}
 			}
 		});
@@ -89,6 +91,7 @@ public class Sala {
 				jo.add("data", jo1);
 				cliente.escribirMensaje(jo.toString());
 				frame.hide();
+				Lobby.setVisible();
 			}
 		});
 		btnSalirButton.setBounds(241, 182, 120, 23);
@@ -100,10 +103,10 @@ public class Sala {
 				JsonObject jo = new JsonObject();
 				JsonObject jo1 = new JsonObject();
 				jo.addProperty("nombre", "INICIAR_PARTIDA");
-				jo1.addProperty("", "");
+				jo1.addProperty("sala", nombreSala);
 				jo.add("data", jo1);
 				cliente.escribirMensaje(jo.toString());
-				System.out.println("Empezar partida");
+				// System.out.println("Empezar partida");
 			}
 		});
 		btnComenzarButton.setBounds(239, 216, 122, 23);
@@ -119,15 +122,15 @@ public class Sala {
 				texto = texto + user + "\n" + "\n";
 			}
 			textPane.setText(texto);
-			frame.repaint();
+			// frame.repaint();
 		}
 	}
 
-	public static void iniciarPartida(String sala) {
-//		if (!nombre.equals(sala)) {
-//			return;
-//		}
-//		System.out.println("empieza la partida");
+	public static void iniciarPartida(String sala, ArrayList<String> jugadoresEnSala) {
+		if (nombre.equals(sala)) {
+			Juego juego = new Juego(jugadoresEnSala);
+			juego.start();
+		}
 	}
 
 }

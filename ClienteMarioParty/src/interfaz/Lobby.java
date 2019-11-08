@@ -138,6 +138,7 @@ public class Lobby {
 				jo1.addProperty("user", nombreUser);
 				jo.add("data", jo1);
 				cliente.escribirMensaje(jo.toString());
+				frame.setVisible(false);
 				Sala sala = new Sala(nombre, cliente, nombreUser);
 			}
 
@@ -188,7 +189,7 @@ public class Lobby {
 					cliente.escribirMensaje(jo.toString());
 					
 					//ESPERAR RESPUESTA DEL SERVIDOR - BILELLO
-					
+					frame.setVisible(false);
 					Sala sala2 = new Sala(nombre, cliente, nombreUser);
 				}
 			});
@@ -215,6 +216,11 @@ public class Lobby {
 		//redibujo sin la sala eliminada
 		dibujarBotonesSalas(salasNombres);
 
+	}
+
+	public static void setVisible() {
+		frame.setVisible(true);
+		
 	}
 
 
