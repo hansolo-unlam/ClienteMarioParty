@@ -21,8 +21,9 @@ public class Cliente {
 		try {
 			socket = new Socket(HOST, PUERTO);
 			System.out.println("Se conecto " + nombre);
-
-			in = new DataInputStream(socket.getInputStream());
+			ThreadEscucha escucha = new ThreadEscucha(socket);
+			escucha.start();
+			//in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
 
 		} catch (IOException e) {
@@ -46,15 +47,15 @@ public class Cliente {
 //	public boolean isClosed() {
 //		return socket.isClosed();
 //	}
-//
-//	public String recibirMensaje() {
-//		try {
-//			return in.readUTF();
-//		} catch (IOException e) {
-//			System.out.println("No se pudo recibir el mensaje");
-//		}
-//		return "";
-//	}
+
+	public String recibirMensaje() {
+		try {
+			return in.readUTF();
+		} catch (IOException e) {
+			System.out.println("No se pudo recibir el mensaje");
+		}
+		return "";
+	}
 
 	public void cerrarSocket() {
 		try {

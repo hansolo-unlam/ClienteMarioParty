@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,20 +23,22 @@ import cliente.Cliente;
 
 public class Lobby {
 
-	private final int WIDHT = 140;
-	private final int HEIGHT = 30;
-	private int desplazamiento = HEIGHT;
-	private int desplazamientoX = 0;
+	private final static int WIDHT = 140;
+	private final static int HEIGHT = 30;
+	private static int desplazamiento = HEIGHT;
+	private static int desplazamientoX = 0;
 
 	private JButton btnCrearSala;
-	private JFrame frame;
-	private JPanel contentPane;
+	private static JFrame frame;
+	private static JPanel contentPane;
 
 	private JLabel lblJugadores;
 	private JLabel lblSalas;
 	private JTextPane textPane;
 
-	private Cliente cliente;
+	private static Cliente cliente;
+
+	private static ArrayList<String> salasNombres = new ArrayList<String>();
 
 	private int cantSalas = 0;
 
@@ -52,23 +55,21 @@ public class Lobby {
 		frame.setSize(600, 500);
 		frame.setLocationRelativeTo(null);
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
-		    @Override
-		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		        if (JOptionPane.showConfirmDialog(frame, 
-		            "¿Queres salir del MarioParty?", "¿Cerrar lobby?", 
-		            JOptionPane.YES_NO_OPTION,
-		            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-		        	JsonObject jo = new JsonObject();
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+				if (JOptionPane.showConfirmDialog(frame, "¿Queres salir del MarioParty?", "¿Cerrar lobby?",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+					JsonObject jo = new JsonObject();
 					JsonObject jo1 = new JsonObject();
 					jo.addProperty("nombre", "SALIR");
 					jo1.addProperty("", "");
 					jo.add("data", jo1);
 					cliente.escribirMensaje(jo.toString());
-		            System.exit(0);
-		        }
-		    }
+					System.exit(0);
+				}
+			}
 		});
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -107,34 +108,6 @@ public class Lobby {
 				jo.add("data", jo1);
 				cliente.escribirMensaje(jo.toString());
 				Sala sala = new Sala(nombre, cliente);
-				JButton btnSala = new JButton(nombre);
-				cantSalas++;
-				if ((cantSalas - 1) % 7 == 0)
-					desplazamiento = 0;
-				if (cantSalas > 7) {
-					desplazamientoX = WIDHT * ((cantSalas - 1) / 7) + 30;
-				}
-				if (cantSalas == 14)
-					btnCrearSala.setEnabled(false);
-				textPane.setText(cantSalas + "\n");
-
-				btnSala.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						System.out.println("Ingresar a la sala");
-						JsonObject jo = new JsonObject();
-						JsonObject jo1 = new JsonObject();
-						jo.addProperty("nombre", "INGRESAR_SALA");
-						jo1.addProperty("nombreSala", nombre);
-						jo.add("data", jo1);
-						cliente.escribirMensaje(jo.toString());
-						Sala sala2 = new Sala(nombre, cliente);
-					}
-				});
-
-				btnSala.setBounds(240 + desplazamientoX, 60 + desplazamiento, WIDHT, HEIGHT);
-				desplazamiento += HEIGHT + 10;
-				contentPane.add(btnSala);
-				frame.repaint();
 			}
 
 		});
@@ -142,10 +115,65 @@ public class Lobby {
 		btnCrearSala.setBounds(241, 380, 160, 50);
 		contentPane.add(btnCrearSala);
 		frame.setVisible(true);
+		dibujarBotonesSalas(salasNombres);
+	}
+
+	public static void agregarSala(String nombre) {
+		salasNombres.add(nombre);
+		dibujarBotonesSalas(salasNombres);
+
+	}
+	public static ArrayList<JButton> btnsSala = new ArrayList<JButton>();
+	
+	public static void dibujarBotonesSalas(ArrayList<String> salasNombres) {
+		int cont = 0;
+		for (String nombre : salasNombres) {
+		cont++;	
+		btnsSala.add(new JButton(nombre));
+		if ((cont - 1) % 7 == 0)
+			desplazamiento = 0;
+		if (cont > 7) {
+			desplazamientoX = WIDHT * ((cont - 1) / 7) + 30;
+		}
+//		if (cont == 14)
+//			btnCrearSala.setEnabled(false);
+			//textPane.setText(cont + "\n");
+
+		btnsSala.get(cont-1).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Ingresar a la sala");
+				JsonObject jo = new JsonObject();
+				JsonObject jo1 = new JsonObject();
+				jo.addProperty("nombre", "INGRESAR_SALA");
+				jo1.addProperty("salaSolicitada", nombre);
+				jo.add("data", jo1);
+				cliente.escribirMensaje(jo.toString());
+				Sala sala2 = new Sala(nombre, cliente);
+			}
+		});
+
+		btnsSala.get(cont-1).setBounds(240 + desplazamientoX, 60 + desplazamiento, WIDHT, HEIGHT);
+		desplazamiento += HEIGHT + 10;
+		contentPane.add(btnsSala.get(cont-1));
+		frame.repaint();
+		}
+
 	}
 
 	public static void main(String[] args) {
 		new Lobby("Lobby MarioParty");
+	}
+
+	public static void eliminarSala(String salaEliminada) {
+		for (JButton btn : btnsSala) {
+			btn.setVisible(false);
+			contentPane.remove(btn);
+			
+		}
+		btnsSala.clear();
+		salasNombres.remove(salaEliminada);
+		dibujarBotonesSalas(salasNombres);
+
 	}
 
 }
