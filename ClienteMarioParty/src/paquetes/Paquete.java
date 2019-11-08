@@ -1,10 +1,7 @@
 package paquetes;
 
-import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import interfaz.Lobby;
@@ -18,8 +15,6 @@ public class Paquete {
 	private JsonObject jsonObject;
 	private String cabecera;
 	private JsonObject data;
-	private Socket socketCliente;
-
 	/*
 	 * public Paquete(int id, String tipo, int idPartida) { this.tipo = tipo;
 	 * this.id = id; this.idPartida = idPartida; }
@@ -29,7 +24,6 @@ public class Paquete {
 
 	public Paquete(JsonObject jsonObject, Socket socketCliente) {
 		this.jsonObject = jsonObject;
-		this.socketCliente = socketCliente;
 		verificarPaquete();
 
 	}
@@ -39,10 +33,12 @@ public class Paquete {
 		data = jsonObject.get("data").getAsJsonObject();
 
 		switch (cabecera) {
+		
 		case "SALA_CREADA":
 			String salaCreada = data.get("salaCreada").getAsString();
 			Lobby.agregarSala(salaCreada);
 			break;
+
 		case "SALA_ELIMINADA":
 			String salaEliminada = data.get("salaEliminada").getAsString();
 			Lobby.eliminarSala(salaEliminada);

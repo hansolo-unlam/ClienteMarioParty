@@ -54,6 +54,7 @@ public class Lobby {
 		frame.setResizable(false);
 		frame.setSize(600, 500);
 		frame.setLocationRelativeTo(null);
+		// cuando cierro la ventana le aviso al server que me desconecto
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -69,7 +70,6 @@ public class Lobby {
 				}
 			}
 		});
-		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,6 +101,7 @@ public class Lobby {
 		btnCrearSala.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nombre = JOptionPane.showInputDialog("Ingresar nombre de la sala");
+				// creo el mensaje para el server
 				JsonObject jo = new JsonObject();
 				JsonObject jo1 = new JsonObject();
 				jo.addProperty("nombre", "NUEVA_SALA");
@@ -123,39 +124,45 @@ public class Lobby {
 		dibujarBotonesSalas(salasNombres);
 
 	}
+
 	public static ArrayList<JButton> btnsSala = new ArrayList<JButton>();
 	
+	//cada vez que agrego o elimino un boton redibujo todo
 	public static void dibujarBotonesSalas(ArrayList<String> salasNombres) {
 		int cont = 0;
-		for (String nombre : salasNombres) {
-		cont++;	
-		btnsSala.add(new JButton(nombre));
-		if ((cont - 1) % 7 == 0)
-			desplazamiento = 0;
-		if (cont > 7) {
-			desplazamientoX = WIDHT * ((cont - 1) / 7) + 30;
+		//elimino los botones anterioroes
+		for (JButton btn : btnsSala) {
+			btn.setVisible(false);
+			contentPane.remove(btn);
 		}
-//		if (cont == 14)
-//			btnCrearSala.setEnabled(false);
-			//textPane.setText(cont + "\n");
-
-		btnsSala.get(cont-1).addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Ingresar a la sala");
-				JsonObject jo = new JsonObject();
-				JsonObject jo1 = new JsonObject();
-				jo.addProperty("nombre", "INGRESAR_SALA");
-				jo1.addProperty("salaSolicitada", nombre);
-				jo.add("data", jo1);
-				cliente.escribirMensaje(jo.toString());
-				Sala sala2 = new Sala(nombre, cliente);
+		btnsSala.clear();
+		// por cada sala existente creo un nuevo boton
+		for (String nombre : salasNombres) {
+			cont++;
+			btnsSala.add(new JButton(nombre));
+			if ((cont - 1) % 7 == 0)
+				desplazamiento = 0;
+			if (cont > 7) {
+				desplazamientoX = WIDHT * ((cont - 1) / 7) + 30;
 			}
-		});
 
-		btnsSala.get(cont-1).setBounds(240 + desplazamientoX, 60 + desplazamiento, WIDHT, HEIGHT);
-		desplazamiento += HEIGHT + 10;
-		contentPane.add(btnsSala.get(cont-1));
-		frame.repaint();
+			btnsSala.get(cont - 1).addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Ingresar a la sala");
+					JsonObject jo = new JsonObject();
+					JsonObject jo1 = new JsonObject();
+					jo.addProperty("nombre", "INGRESAR_SALA");
+					jo1.addProperty("salaSolicitada", nombre);
+					jo.add("data", jo1);
+					cliente.escribirMensaje(jo.toString());
+					Sala sala2 = new Sala(nombre, cliente);
+				}
+			});
+
+			btnsSala.get(cont - 1).setBounds(240 + desplazamientoX, 60 + desplazamiento, WIDHT, HEIGHT);
+			desplazamiento += HEIGHT + 10;
+			contentPane.add(btnsSala.get(cont - 1));
+			frame.repaint();
 		}
 
 	}
@@ -165,13 +172,8 @@ public class Lobby {
 	}
 
 	public static void eliminarSala(String salaEliminada) {
-		for (JButton btn : btnsSala) {
-			btn.setVisible(false);
-			contentPane.remove(btn);
-			
-		}
-		btnsSala.clear();
 		salasNombres.remove(salaEliminada);
+		//redibujo sin la sala eliminada
 		dibujarBotonesSalas(salasNombres);
 
 	}

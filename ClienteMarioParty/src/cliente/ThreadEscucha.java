@@ -59,6 +59,7 @@ public class ThreadEscucha extends Thread{
 				Paquete inputPaquete = gson.fromJson(mensajeRecibido, Paquete.class);*/
 
 			} catch (IOException e) {
+				
 			}
 		}
 
