@@ -5,6 +5,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import paquetes.Paquete;
+
 public class Cliente {
 	private final int PUERTO = 9000;
 	private final String HOST = "localhost";
@@ -14,6 +19,8 @@ public class Cliente {
 	private Socket socket;
 	private DataInputStream in;
 	private DataOutputStream out;
+	
+	private boolean mensajeRespondido = false;
 
 	public Cliente(String nombre) {
 		this.nombre = nombre;
@@ -22,9 +29,10 @@ public class Cliente {
 			socket = new Socket(HOST, PUERTO);
 			System.out.println("Se conecto " + nombre);
 			//creo un hilo para escuchar al server
-			ThreadEscucha escucha = new ThreadEscucha(socket);
-			escucha.start();
+			//ThreadEscucha escucha = new ThreadEscucha(socket);
+			//escucha.start();
 			out = new DataOutputStream(socket.getOutputStream());
+			in = new DataInputStream(socket.getInputStream());
 
 		} catch (IOException e) {
 			System.out.println(nombre + " no se pudo conectar");
@@ -42,6 +50,32 @@ public class Cliente {
 		} catch (IOException e) {
 			System.out.println("No se pudo escribir el mensaje");
 		}
+	}
+	
+	public boolean esperarRespuesta() {
+		if(socket.isClosed())
+			return false;
+		try {
+			String mensajeRecibido = null;
+
+			synchronized (in) {
+				mensajeRecibido = in.readUTF();
+				mensajeRespondido = true;
+			}
+			
+			JsonParser parser = new JsonParser();
+			JsonObject gsonArr = parser.parse(mensajeRecibido).getAsJsonObject();
+			Paquete paquete = new Paquete(gsonArr, socket);
+			
+
+			/*Gson gson = new Gson();
+
+			Paquete inputPaquete = gson.fromJson(mensajeRecibido, Paquete.class);*/
+
+		} catch (IOException e) {
+			return false;
+		}
+		return true;
 	}
 
 

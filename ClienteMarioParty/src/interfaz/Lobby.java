@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+import java.io.DataInputStream;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -63,6 +64,16 @@ public class Lobby {
 		jo1.addProperty("usuario", nombreUser);
 		jo.add("data", jo1);
 		cliente.escribirMensaje(jo.toString());
+		
+		
+		MensajeEspera mensajeEspera = new MensajeEspera();
+		mensajeEspera.setVisible(true);
+		new Thread(mensajeEspera).start();
+		cliente.esperarRespuesta();
+		mensajeEspera.stop();
+		
+		//PERMITE INGRESAR AUNQUE NO TENGA PERMISO
+		//ESPERAR RESPUESTA DEL SERVIDOR - BILELLO
 		init(nombre);
 	}
 
@@ -172,6 +183,9 @@ public class Lobby {
 					jo1.addProperty("salaSolicitada", nombre);
 					jo.add("data", jo1);
 					cliente.escribirMensaje(jo.toString());
+					
+					//ESPERAR RESPUESTA DEL SERVIDOR - BILELLO
+					
 					Sala sala2 = new Sala(nombre, cliente);
 				}
 			});

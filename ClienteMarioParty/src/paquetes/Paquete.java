@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.google.gson.JsonObject;
 
 import interfaz.Lobby;
+import interfaz.Sala;
 
 public class Paquete {
 
@@ -68,6 +69,12 @@ public class Paquete {
 
 			Lobby.setUserNames(users);
 			break;
+			
+		/*case "ACK_INGRESAR_SALA":
+			Sala sala2 = new Sala(nombre, cliente);
+			break;*/
 		}
+		
+		
 	}
 }
