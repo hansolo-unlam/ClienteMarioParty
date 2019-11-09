@@ -109,11 +109,10 @@ public class Paquete {
 			break;
 
 		case "POSICION":
-			index = data.get("jugador").getAsInt();
-			int x = data.get("x").getAsInt();
-			int y = data.get("y").getAsInt();
-			juego = data.get("juego").getAsString();
 			
+			juego = data.get("juego").getAsString();
+			char direccion = data.get("direccion").getAsCharacter();
+			Sala.informarDireccion(direccion, juego);
 			break;
 			
 		case "MOVIMIENTOS":

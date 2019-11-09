@@ -26,6 +26,7 @@ public class Jugador {
 	// private List<Item> items;
 
 	private int cantMovimientos;
+
 	public String getUser() {
 		return user;
 	}
@@ -34,8 +35,14 @@ public class Jugador {
 	private boolean pierdeTurno = false;
 
 	private Juego juego;
-	//esta variable me permite saber si este jugador es el que esta jugando en esta ventana
+	// esta variable me permite saber si este jugador es el que esta jugando en esta
+	// ventana
 	private String mainUser;
+	private boolean isBifurcacion = false;
+
+	public void setBifurcacion(boolean isBifurcacion) {
+		this.isBifurcacion = isBifurcacion;
+	}
 
 	public String getMainUser() {
 		return mainUser;
@@ -71,7 +78,6 @@ public class Jugador {
 
 			if (posicion.isEfectoPasandoSobre())
 				juego.getJuegoState().activarEfectoCasillero();
-
 			if (cantMovimientos == 0) {
 				// Antes de terminar el turno, debería ejecutar el efecto del casillero en donde
 				// terminé
@@ -81,7 +87,10 @@ public class Jugador {
 				juego.pasarTurno();
 				// System.out.println("ACÁ DEBERÍA TERMINAR EL TURNO");
 			} else {
-				posicion = posicion.getSiguiente().getCasillero();
+				if (!isBifurcacion)
+					posicion = posicion.getSiguiente().getCasillero();
+				isBifurcacion = false;
+				// posicion = posicion.getSiguiente().getCasillero();
 			}
 
 			// si no estoy parado en mi posicion y me quedan movimientos, tengo que ir hacia
@@ -89,6 +98,12 @@ public class Jugador {
 		} else if (!estoyParadoEnMiPosicion() && avanzando) { // cantMovimientos != 0) {
 			avanzarHaciaPosicion();
 		}
+	}
+
+	private void settearSiguiente(Casillero posicion) {
+		if (!isBifurcacion)
+			posicion = posicion.getSiguiente().getCasillero();
+		isBifurcacion = false;
 	}
 
 	public void dibujar(Graphics g) {
@@ -227,6 +242,27 @@ public class Jugador {
 
 	public void setPierdeTurno(boolean pierdeTurno) {
 		this.pierdeTurno = pierdeTurno;
+	}
+
+	public void setDireccion(char direccion) {
+
+		switch (direccion) {
+		case 'n':
+			posicion = posicion.getNorte().getCasillero();
+			break;
+		case 's':
+			posicion = posicion.getSur().getCasillero();
+			break;
+
+		case 'e':
+			posicion = posicion.getEste().getCasillero();
+			break;
+
+		case 'o':
+			posicion = posicion.getOeste().getCasillero();
+			break;
+		}
+
 	}
 
 }

@@ -165,4 +165,11 @@ public class Sala {
 	}
 	}
 
+	public static void informarDireccion(char direccion, String juegoId) {
+		if (juegoId.equals(nombre)) {
+			juego.informarDireccion(direccion);
+	}
+		
+	}
+
 }

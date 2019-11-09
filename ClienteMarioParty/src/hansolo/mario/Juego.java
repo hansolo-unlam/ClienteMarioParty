@@ -56,7 +56,7 @@ public class Juego implements Runnable {
 		this.ventana = new Ventana();
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).equals(user)) {
-				Jugador jugador = new Jugador(i+1, user, this);
+				Jugador jugador = new Jugador(i + 1, user, this);
 				jugador.setMainUser(user);
 				jugadores.add(jugador);
 			} else
@@ -287,7 +287,14 @@ public class Juego implements Runnable {
 	}
 
 	public void actualizarMonedas(int monedas) {
-		tableroState.getTieneTurno().setMonedas(monedas);;	
+		tableroState.getTieneTurno().setMonedas(monedas);
+		;
+	}
+
+	public void informarDireccion(char direccion) {
+
+		tableroState.getTieneTurno().setDireccion(direccion);
+		tableroState.getTieneTurno().setAvanzando(true);
 	}
 
 }
