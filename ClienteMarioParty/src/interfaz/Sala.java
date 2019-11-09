@@ -159,4 +159,10 @@ public class Sala {
 		
 	}
 
+	public static void actualizarMonedas(String juegoId, int cant) {
+		if (juegoId.equals(nombre)) {
+			juego.actualizarMonedas(cant);
+	}
+	}
+
 }

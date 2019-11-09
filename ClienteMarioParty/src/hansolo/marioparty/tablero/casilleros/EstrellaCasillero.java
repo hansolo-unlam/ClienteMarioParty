@@ -41,7 +41,7 @@ public class EstrellaCasillero extends Casillero {
 	}
 
 	@Override
-	public void efecto(Jugador jugador, AdministradorUI administradorUI) {
+	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
 		//mensaje al server
 //		System.out.println(jugador.getUser().getNombre() + " pasó o calló en un casillero de estrella");
 //

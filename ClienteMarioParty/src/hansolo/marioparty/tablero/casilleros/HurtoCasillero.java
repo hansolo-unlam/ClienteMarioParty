@@ -29,7 +29,7 @@ public class HurtoCasillero extends Casillero {
 	}
 
 	@Override
-	public void efecto(Jugador jugador, AdministradorUI administradorUI) {
+	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
 		//mensaje al server
 		
 //		List<Jugador> jugadores = jugador.getJuego().getJugadores();

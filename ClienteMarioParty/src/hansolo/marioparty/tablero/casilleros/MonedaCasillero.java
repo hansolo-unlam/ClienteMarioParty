@@ -3,6 +3,10 @@ package hansolo.marioparty.tablero.casilleros;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import com.google.gson.JsonObject;
+
+import cliente.Cliente;
+import hansolo.mario.Juego;
 import hansolo.marioparty.entidades.Jugador;
 import hansolo.marioparty.graficos.Texturas;
 import hansolo.marioparty.tablero.Casillero;
@@ -24,11 +28,14 @@ public class MonedaCasillero extends Casillero {
 	}
 
 	@Override
-	public void efecto(Jugador jugador, AdministradorUI administradorUI) {
-		//mensaje al server
-//		System.out.println(jugador.getUser().getNombre() + " calló en un casillero de monedas");
-//
-//		jugador.setMonedas( Math.max(0, jugador.getMonedas() + this.cantMonedas));
+	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
+		JsonObject jo = new JsonObject();
+		JsonObject jo1 = new JsonObject();
+		jo.addProperty("nombre", "MONEDAS");
+		jo1.addProperty("juego", juego);
+		jo1.addProperty("cant", this.cantMonedas);
+		jo.add("data", jo1);
+		Cliente.escribirMensaje(jo.toString());
 	}
 
 	public int getMoneda() {

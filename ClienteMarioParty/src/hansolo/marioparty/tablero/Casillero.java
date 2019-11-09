@@ -38,7 +38,7 @@ public abstract class Casillero {
 		this.sur = null;
 	}
 
-	public abstract void efecto(Jugador jugador, AdministradorUI administradorUI);
+	public abstract void efecto(Jugador jugador, AdministradorUI administradorUI, String string);
 	
 	protected abstract void dibujar(Graphics g);
 	

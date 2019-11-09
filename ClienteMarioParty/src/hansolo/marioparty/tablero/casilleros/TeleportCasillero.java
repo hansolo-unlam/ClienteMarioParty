@@ -30,7 +30,7 @@ public class TeleportCasillero extends Casillero {
 	}
 
 	@Override
-	public void efecto(Jugador jugador, AdministradorUI administradorUI) {
+	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
 		//mensaje al server
 //		List<Jugador> jugadores = jugador.getJuego().getJugadores();
 //		dibujarBotones(jugador, administradorUI, jugadores);

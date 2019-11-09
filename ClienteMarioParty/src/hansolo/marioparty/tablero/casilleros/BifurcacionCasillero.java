@@ -29,11 +29,11 @@ public class BifurcacionCasillero extends Casillero {
 	 * parado sobre una bifurcación.
 	 */
 	@Override
-	public void efecto(Jugador jugador, AdministradorUI administradorUI) {
-		jugador.setCantMovimientos(jugador.getCantMovimientos() + 1);
-		jugador.setAvanzando(false);
-		
-		dibujarBotones(jugador, administradorUI);
+	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
+//		jugador.setCantMovimientos(jugador.getCantMovimientos() + 1);
+//		jugador.setAvanzando(false);
+//		
+//		dibujarBotones(jugador, administradorUI);
 	}
 	
 	public void dibujarBotones(Jugador jugador, AdministradorUI administradorUI) {

@@ -25,7 +25,7 @@ public class TiendaCasillero extends Casillero {
 	}
 
 	@Override
-	public void efecto(Jugador jugador, AdministradorUI administradorUI) {
+	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
 		// TODO Auto-generated method stub
 
 	}

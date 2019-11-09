@@ -286,4 +286,8 @@ public class Juego implements Runnable {
 		tableroState.getTieneTurno().startAvanzar();
 	}
 
+	public void actualizarMonedas(int monedas) {
+		tableroState.getTieneTurno().setMonedas(monedas);;	
+	}
+
 }

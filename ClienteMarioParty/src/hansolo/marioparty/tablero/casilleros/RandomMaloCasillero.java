@@ -27,7 +27,7 @@ public class RandomMaloCasillero extends Casillero {
 	}
 
 	@Override
-	public void efecto(Jugador jugador, AdministradorUI administradorUI) {
+	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
 		Random random = new Random();
 		int indice = random.nextInt(8);
 		JFrame frame = new JFrame();

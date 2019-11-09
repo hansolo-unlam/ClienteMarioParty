@@ -23,7 +23,7 @@ public class ItemCasillero extends Casillero {
 	}
 
 	@Override
-	public void efecto(Jugador jugador, AdministradorUI administradorUI) {
+	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
 		//System.out.println(jugador.getUser().getNombre() + " calló en un casillero de item");
 	}
 

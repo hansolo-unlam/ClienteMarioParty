@@ -171,7 +171,7 @@ public class TableroState extends State {
 	}
 
 	public void activarEfectoCasillero() {
-		// tieneTurno.getPosicion().efecto(tieneTurno, administradorUI);
+		tieneTurno.getPosicion().efecto(tieneTurno, administradorUI, juego.getId());
 	}
 
 	public EnumEstadoJuego getSubEstado() {
