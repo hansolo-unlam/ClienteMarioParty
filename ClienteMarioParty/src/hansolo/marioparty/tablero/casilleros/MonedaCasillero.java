@@ -29,13 +29,15 @@ public class MonedaCasillero extends Casillero {
 
 	@Override
 	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
-		JsonObject jo = new JsonObject();
-		JsonObject jo1 = new JsonObject();
-		jo.addProperty("nombre", "MONEDAS");
-		jo1.addProperty("juego", juego);
-		jo1.addProperty("cant", this.cantMonedas);
-		jo.add("data", jo1);
-		Cliente.escribirMensaje(jo.toString());
+		if (jugador.getMainUser().equals(jugador.getUser())) {
+			JsonObject jo = new JsonObject();
+			JsonObject jo1 = new JsonObject();
+			jo.addProperty("nombre", "MONEDAS");
+			jo1.addProperty("juego", juego);
+			jo1.addProperty("cant", this.cantMonedas);
+			jo.add("data", jo1);
+			Cliente.escribirMensaje(jo.toString());
+		}
 	}
 
 	public int getMoneda() {
@@ -44,11 +46,11 @@ public class MonedaCasillero extends Casillero {
 
 	@Override
 	protected void dibujar(Graphics g) {
-		if(this.cantMonedas > 0)
+		if (this.cantMonedas > 0)
 			g.drawImage(Texturas.casillero_moneda_positivo, x, y, null);
-		if(this.cantMonedas < 0)
+		if (this.cantMonedas < 0)
 			g.drawImage(Texturas.casillero_moneda_negativo, x, y, null);
-		
+
 //		g.setFont(new Font("Calibri", Font.PLAIN, 20));
 //		g.drawString(Integer.toString(id), x + 16, y + 16);
 	}

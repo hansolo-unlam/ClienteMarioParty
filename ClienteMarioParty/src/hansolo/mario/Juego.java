@@ -55,12 +55,9 @@ public class Juego implements Runnable {
 		this.user = user;
 		this.ventana = new Ventana();
 		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).equals(user)) {
-				Jugador jugador = new Jugador(i + 1, user, this);
+				Jugador jugador = new Jugador(i + 1, users.get(i), this);
 				jugador.setMainUser(user);
 				jugadores.add(jugador);
-			} else
-				jugadores.add(new Jugador(i + 1, users.get(i), this));
 		}
 		mouseManager = new MouseManager();
 		keyManager = new KeyManager();
