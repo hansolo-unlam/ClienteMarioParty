@@ -131,6 +131,12 @@ public class Paquete {
 			cant = data.get("cant").getAsInt();
 			Sala.actualizarMonedas(juego, cant);
 			break;
+			
+		case "HURTO":
+			juego = data.get("juego").getAsString();
+			String robado = data.get("robado").getAsString();
+			Sala.hurto(juego, robado);
+			break;
 		/*
 		 * case "ACK_INGRESAR_SALA": Sala sala2 = new Sala(nombre, cliente); break;
 		 */

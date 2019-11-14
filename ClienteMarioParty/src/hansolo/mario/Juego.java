@@ -292,6 +292,21 @@ public class Juego implements Runnable {
 
 		tableroState.getTieneTurno().setDireccion(direccion);
 		tableroState.getTieneTurno().setAvanzando(true);
+		
+	}
+
+	public void hurto(String robado) {
+		int i=0;
+		while(!jugadores.get(i).getUser().equals(robado)) {
+			i++;
+		}
+		if (jugadores.get(i).getMonedas() >= 5) {
+			jugadores.get(i).setMonedas(jugadores.get(i).getMonedas() - 5);
+			tableroState.getTieneTurno().setMonedas(tableroState.getTieneTurno().getMonedas() + 5);
+		} else {
+			tableroState.getTieneTurno().setMonedas(tableroState.getTieneTurno().getMonedas() + jugadores.get(i).getMonedas());
+			jugadores.get(i).setMonedas(0);
+		}
 	}
 
 }

@@ -172,4 +172,10 @@ public class Sala {
 		
 	}
 
+	public static void hurto(String juegoId, String robado) {
+		if (juegoId.equals(nombre)) {
+			juego.hurto(robado);
+	}
+	}
+
 }
