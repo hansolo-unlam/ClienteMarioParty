@@ -8,6 +8,9 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.google.gson.JsonObject;
+
+import cliente.Cliente;
 import hansolo.marioparty.entidades.Jugador;
 import hansolo.marioparty.graficos.Texturas;
 import hansolo.marioparty.tablero.Casillero;
@@ -28,6 +31,14 @@ public class RandomMaloCasillero extends Casillero {
 
 	@Override
 	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
+		if (jugador.getMainUser().equals(jugador.getUser())) {
+			JsonObject jo = new JsonObject();
+			JsonObject jo1 = new JsonObject();
+			jo.addProperty("nombre", "RANDOM");
+			jo1.addProperty("juego", juego);
+			jo.add("data", jo1);
+			Cliente.escribirMensaje(jo.toString());
+		}
 //		Random random = new Random();
 //		int indice = random.nextInt(8);
 //		JFrame frame = new JFrame();

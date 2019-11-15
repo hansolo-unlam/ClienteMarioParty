@@ -137,6 +137,12 @@ public class Paquete {
 			String robado = data.get("robado").getAsString();
 			Sala.hurto(juego, robado);
 			break;
+			
+		case "RANDOM":
+			juego = data.get("juego").getAsString();
+			int indice = data.get("indice").getAsInt();
+			Sala.randomMalo(juego, indice);
+			break;
 		/*
 		 * case "ACK_INGRESAR_SALA": Sala sala2 = new Sala(nombre, cliente); break;
 		 */

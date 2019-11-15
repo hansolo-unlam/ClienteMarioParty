@@ -30,8 +30,9 @@ public class Ventana extends Thread {
 		
 		frame = new JFrame("Mario Party - Han Solo");
 		frame.setSize(width, height);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		
 		frame.setResizable(false); // que no se pueda modificar el tamaño
 		frame.setLocationRelativeTo(null); // que se abra en el centro de la pantalla
 		frame.setVisible(true); // que se pueda ver

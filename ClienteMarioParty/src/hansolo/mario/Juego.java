@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import states.*;
 import hansolo.marioparty.entidades.Jugador;
 import hansolo.marioparty.graficos.*;
@@ -307,6 +310,55 @@ public class Juego implements Runnable {
 			tableroState.getTieneTurno().setMonedas(tableroState.getTieneTurno().getMonedas() + jugadores.get(i).getMonedas());
 			jugadores.get(i).setMonedas(0);
 		}
+	}
+
+	public void randomMalo(int indice) {
+		JFrame frame = new JFrame();
+		switch (indice) {
+		case 0:
+			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.9));
+			JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdio el 10% de sus monedas");
+			break;
+			
+		case 1:
+			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.8));
+			JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdio el 20% de tus monedas");
+			break;
+			
+		case 2:
+			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.7));
+			JOptionPane.showMessageDialog(frame, tableroState.getTieneTurno().getUser() +" perdio el 30% de tus monedas");
+			break;
+		
+		case 3:
+			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.9));
+			JOptionPane.showMessageDialog(frame, tableroState.getTieneTurno().getUser() +" perdio el 10% de tus monedas");
+			break;
+			
+		case 4:
+			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.8));
+			JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdiste el 20% de tus monedas");
+			break;
+			
+		case 5:
+			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.7));
+			JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdio el 30% de tus monedas");
+			break;
+		
+		case 6:
+			if(tableroState.getTieneTurno().getEstrellas()>0) {
+				tableroState.getTieneTurno().setEstrellas(tableroState.getTieneTurno().getEstrellas()-1);
+				JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdio una estrella");
+			}
+			else
+//				JOptionPane.showMessageDialog(frame, "Safaste maestro");
+			break;
+		
+		case 7:	
+			tableroState.getTieneTurno().setPierdeTurno(true);
+			JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdio un turno");
+		}
+		
 	}
 
 }

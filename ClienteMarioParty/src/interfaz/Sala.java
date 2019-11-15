@@ -178,4 +178,10 @@ public class Sala {
 	}
 	}
 
+	public static void randomMalo(String juegoId, int indice) {
+		if (juegoId.equals(nombre)) {
+			juego.randomMalo(indice);
+	}
+	}
+
 }
