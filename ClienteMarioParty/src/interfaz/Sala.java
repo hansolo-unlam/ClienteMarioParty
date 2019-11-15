@@ -184,4 +184,11 @@ public class Sala {
 	}
 	}
 
+	public static void TP(String juegoId, String moverseHacia) {
+		if (juegoId.equals(nombre)) {
+			juego.TP(moverseHacia);
+	
+	}
+	}
+
 }

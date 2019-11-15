@@ -58,9 +58,9 @@ public class Juego implements Runnable {
 		this.user = user;
 		this.ventana = new Ventana();
 		for (int i = 0; i < users.size(); i++) {
-				Jugador jugador = new Jugador(i + 1, users.get(i), this);
-				jugador.setMainUser(user);
-				jugadores.add(jugador);
+			Jugador jugador = new Jugador(i + 1, users.get(i), this);
+			jugador.setMainUser(user);
+			jugadores.add(jugador);
 		}
 		mouseManager = new MouseManager();
 		keyManager = new KeyManager();
@@ -295,19 +295,20 @@ public class Juego implements Runnable {
 
 		tableroState.getTieneTurno().setDireccion(direccion);
 		tableroState.getTieneTurno().setAvanzando(true);
-		
+
 	}
 
 	public void hurto(String robado) {
-		int i=0;
-		while(!jugadores.get(i).getUser().equals(robado)) {
+		int i = 0;
+		while (!jugadores.get(i).getUser().equals(robado)) {
 			i++;
 		}
 		if (jugadores.get(i).getMonedas() >= 5) {
 			jugadores.get(i).setMonedas(jugadores.get(i).getMonedas() - 5);
 			tableroState.getTieneTurno().setMonedas(tableroState.getTieneTurno().getMonedas() + 5);
 		} else {
-			tableroState.getTieneTurno().setMonedas(tableroState.getTieneTurno().getMonedas() + jugadores.get(i).getMonedas());
+			tableroState.getTieneTurno()
+					.setMonedas(tableroState.getTieneTurno().getMonedas() + jugadores.get(i).getMonedas());
 			jugadores.get(i).setMonedas(0);
 		}
 	}
@@ -316,49 +317,65 @@ public class Juego implements Runnable {
 		JFrame frame = new JFrame();
 		switch (indice) {
 		case 0:
-			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.9));
-			JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdio el 10% de sus monedas");
+			tableroState.getTieneTurno().setMonedas((int) (tableroState.getTieneTurno().getMonedas() * 0.9));
+			JOptionPane.showMessageDialog(frame,
+					tableroState.getTieneTurno().getUser() + " perdio el 10% de sus monedas");
 			break;
-			
+
 		case 1:
-			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.8));
-			JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdio el 20% de tus monedas");
+			tableroState.getTieneTurno().setMonedas((int) (tableroState.getTieneTurno().getMonedas() * 0.8));
+			JOptionPane.showMessageDialog(frame,
+					tableroState.getTieneTurno().getUser() + " perdio el 20% de tus monedas");
 			break;
-			
+
 		case 2:
-			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.7));
-			JOptionPane.showMessageDialog(frame, tableroState.getTieneTurno().getUser() +" perdio el 30% de tus monedas");
+			tableroState.getTieneTurno().setMonedas((int) (tableroState.getTieneTurno().getMonedas() * 0.7));
+			JOptionPane.showMessageDialog(frame,
+					tableroState.getTieneTurno().getUser() + " perdio el 30% de tus monedas");
 			break;
-		
+
 		case 3:
-			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.9));
-			JOptionPane.showMessageDialog(frame, tableroState.getTieneTurno().getUser() +" perdio el 10% de tus monedas");
+			tableroState.getTieneTurno().setMonedas((int) (tableroState.getTieneTurno().getMonedas() * 0.9));
+			JOptionPane.showMessageDialog(frame,
+					tableroState.getTieneTurno().getUser() + " perdio el 10% de tus monedas");
 			break;
-			
+
 		case 4:
-			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.8));
-			JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdiste el 20% de tus monedas");
+			tableroState.getTieneTurno().setMonedas((int) (tableroState.getTieneTurno().getMonedas() * 0.8));
+			JOptionPane.showMessageDialog(frame,
+					tableroState.getTieneTurno().getUser() + " perdiste el 20% de tus monedas");
 			break;
-			
+
 		case 5:
-			tableroState.getTieneTurno().setMonedas((int)(tableroState.getTieneTurno().getMonedas()*0.7));
-			JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdio el 30% de tus monedas");
+			tableroState.getTieneTurno().setMonedas((int) (tableroState.getTieneTurno().getMonedas() * 0.7));
+			JOptionPane.showMessageDialog(frame,
+					tableroState.getTieneTurno().getUser() + " perdio el 30% de tus monedas");
 			break;
-		
+
 		case 6:
-			if(tableroState.getTieneTurno().getEstrellas()>0) {
-				tableroState.getTieneTurno().setEstrellas(tableroState.getTieneTurno().getEstrellas()-1);
-				JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdio una estrella");
-			}
-			else
+			if (tableroState.getTieneTurno().getEstrellas() > 0) {
+				tableroState.getTieneTurno().setEstrellas(tableroState.getTieneTurno().getEstrellas() - 1);
+				JOptionPane.showMessageDialog(frame, tableroState.getTieneTurno().getUser() + " perdio una estrella");
+			} else
 //				JOptionPane.showMessageDialog(frame, "Safaste maestro");
-			break;
-		
-		case 7:	
+				break;
+
+		case 7:
 			tableroState.getTieneTurno().setPierdeTurno(true);
-			JOptionPane.showMessageDialog(frame,tableroState.getTieneTurno().getUser() + " perdio un turno");
+			JOptionPane.showMessageDialog(frame, tableroState.getTieneTurno().getUser() + " perdio un turno");
 		}
-		
+
+	}
+
+	public void TP(String moverseHacia) {
+		int i = 0;
+		while (!jugadores.get(i).getUser().equals(moverseHacia)) {
+			i++;
+		}
+		tableroState.getTieneTurno().setPosicion(jugadores.get(i).getPosicion());
+		tableroState.getTieneTurno().setX(jugadores.get(i).getPosicion().getX());
+		tableroState.getTieneTurno().setY(jugadores.get(i).getPosicion().getY());
+
 	}
 
 }

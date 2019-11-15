@@ -143,6 +143,12 @@ public class Paquete {
 			int indice = data.get("indice").getAsInt();
 			Sala.randomMalo(juego, indice);
 			break;
+			
+		case "TP":
+			juego = data.get("juego").getAsString();
+			String moverseHacia = data.get("moverseHacia").getAsString();
+			Sala.TP(juego, moverseHacia);
+			break;
 		/*
 		 * case "ACK_INGRESAR_SALA": Sala sala2 = new Sala(nombre, cliente); break;
 		 */
