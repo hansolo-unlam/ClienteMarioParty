@@ -136,59 +136,64 @@ public class Sala {
 
 	public static void ubicarEstrella(int posicion, String juegoId) {
 		if (juegoId.equals(nombre)) {
-				juego.ubicarEstrella(posicion);
+			juego.ubicarEstrella(posicion);
 		}
 	}
-	
+
 	public static void informarTurno(int index, String juegoId) {
 		if (juegoId.equals(nombre)) {
-				juego.informarTurno(index);
+			juego.informarTurno(index);
 		}
 	}
 
 	public static void informarMovimientos(int cant, String juegoId) {
 		if (juegoId.equals(nombre)) {
 			juego.informarMovimientos(cant);
-	}
+		}
 	}
 
 	public static void informarAvanzar(String juegoId) {
 		if (juegoId.equals(nombre)) {
 			juego.informarAvanzar();
-	}
-		
+		}
+
 	}
 
 	public static void actualizarMonedas(String juegoId, int cant) {
 		if (juegoId.equals(nombre)) {
 			juego.actualizarMonedas(cant);
-	}
+		}
 	}
 
 	public static void informarDireccion(char direccion, String juegoId) {
 		if (juegoId.equals(nombre)) {
 			juego.informarDireccion(direccion);
-	}
-		
+		}
+
 	}
 
 	public static void hurto(String juegoId, String robado) {
 		if (juegoId.equals(nombre)) {
 			juego.hurto(robado);
-	}
+		}
 	}
 
 	public static void randomMalo(String juegoId, int indice) {
 		if (juegoId.equals(nombre)) {
 			juego.randomMalo(indice);
-	}
+		}
 	}
 
 	public static void TP(String juegoId, String moverseHacia) {
 		if (juegoId.equals(nombre)) {
 			juego.TP(moverseHacia);
-	
-	}
+
+		}
 	}
 
+	public static void compraEstrella(String juegoId) {
+		if (juegoId.equals(nombre)) {
+			juego.compraEstrella();
+		}
+	}
 }

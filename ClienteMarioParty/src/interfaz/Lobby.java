@@ -97,6 +97,9 @@ public class Lobby {
 					Cliente.escribirMensaje(jo.toString());
 					System.exit(0);
 				}
+				else  {
+					
+				}
 			}
 		});
 

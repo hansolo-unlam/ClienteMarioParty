@@ -149,6 +149,11 @@ public class Paquete {
 			String moverseHacia = data.get("moverseHacia").getAsString();
 			Sala.TP(juego, moverseHacia);
 			break;
+			
+		case "COMPRA_ESTRELLA":
+			juego = data.get("juego").getAsString();
+			Sala.compraEstrella(juego);
+			break;
 		/*
 		 * case "ACK_INGRESAR_SALA": Sala sala2 = new Sala(nombre, cliente); break;
 		 */

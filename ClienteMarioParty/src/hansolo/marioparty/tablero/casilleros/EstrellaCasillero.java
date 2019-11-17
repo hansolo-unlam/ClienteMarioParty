@@ -4,6 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import com.google.gson.JsonObject;
+
+import cliente.Cliente;
 import hansolo.marioparty.entidades.Jugador;
 import hansolo.marioparty.graficos.Texturas;
 import hansolo.marioparty.tablero.Casillero;
@@ -42,41 +48,51 @@ public class EstrellaCasillero extends Casillero {
 
 	@Override
 	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
-		//mensaje al server
-//		System.out.println(jugador.getUser().getNombre() + " pasó o calló en un casillero de estrella");
-//
+
 		// si la estrella está acá
 		if (tieneEstrella) {
-//			if (jugador.getMonedas() >= PRECIO_ESTRELLA) {
-//				if (true) { // Debería fijarse si el jugador decide comprarla
-//					venderEstrella(jugador);
-//				}
-//			} else {
-//				System.out.println(jugador.getUser().getNombre() + " tiene " + jugador.getMonedas()
-//						+ " MONEDAS, pero la estrella tiene un precio de " + PRECIO_ESTRELLA + " MONEDAS.");
-//			}
-		// si la estrella no está acá, dejar pasar al jugador sin que cuente este casillero como un movimiento
+			if (jugador.getMonedas() >= PRECIO_ESTRELLA) {
+				if (true) { // Debería fijarse si el jugador decide comprarla
+					if (jugador.getMainUser().equals(jugador.getUser()))
+						venderEstrella(jugador, juego);
+				}
+			} else {
+				System.out.println(jugador.getUser() + " tiene " + jugador.getMonedas()
+						+ " MONEDAS, pero la estrella tiene un precio de " + PRECIO_ESTRELLA + " MONEDAS.");
+			}
+
+			// si la estrella no está acá, dejar pasar al jugador sin que cuente este
+			// casillero como un movimiento
 		} else {
 			jugador.setCantMovimientos(jugador.getCantMovimientos() + 1);
 		}
 	}
+
 //
-//	private void venderEstrella(Jugador jugador) {
+	private void venderEstrella(Jugador jugador, String juego) {
+
+		JsonObject jo = new JsonObject();
+		JsonObject jo1 = new JsonObject();
+		jo.addProperty("nombre", "ESTRELLA");
+		jo1.addProperty("juego", juego);
+		jo1.addProperty("casillero", id);
+		jo.add("data", jo1);
+		Cliente.escribirMensaje(jo.toString());
 //		jugador.setMonedas(jugador.getMonedas() - PRECIO_ESTRELLA);
 //		jugador.setEstrellas(jugador.getEstrellas() + 1);
 //		this.tieneEstrella = false;
 //		tablero.ubicarEstrella(id);
-//	}
+	}
 
 	@Override
-	protected void dibujar(Graphics g) {		
+	protected void dibujar(Graphics g) {
 		if (tieneEstrella) {
 			g.drawImage(Texturas.casillero_estrella, x, y, null);
 		}
-		
+
 //		g.setFont(new Font("Calibri", Font.PLAIN, 20));
 //		g.drawString(Integer.toString(id), x + 16, y + 16);
-		
+
 //		if(tieneEstrella)
 //			g.drawImage(Texturas.casillero_estrella, x+8, y+12, null);
 	}

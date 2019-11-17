@@ -54,6 +54,7 @@ public class Juego implements Runnable {
 	private String user;
 
 	public Juego(ArrayList<String> users, String id, String user) {
+		Texturas.init();
 		this.id = id;
 		this.user = user;
 		this.ventana = new Ventana();
@@ -171,7 +172,7 @@ public class Juego implements Runnable {
 		ventana.getCanvas().addMouseMotionListener(mouseManager);
 
 		// cargo las texturas
-		Texturas.init();
+//		Texturas.init();
 
 		// inicializo los estados
 		tableroState = new TableroState(this, tablero);
@@ -376,6 +377,12 @@ public class Juego implements Runnable {
 		tableroState.getTieneTurno().setX(jugadores.get(i).getPosicion().getX());
 		tableroState.getTieneTurno().setY(jugadores.get(i).getPosicion().getY());
 
+	}
+
+	public void compraEstrella() {
+		tableroState.getTieneTurno().setMonedas(tableroState.getTieneTurno().getMonedas()-30);
+		tableroState.getTieneTurno().setEstrellas(tableroState.getTieneTurno().getEstrellas()+1);
+		
 	}
 
 }
