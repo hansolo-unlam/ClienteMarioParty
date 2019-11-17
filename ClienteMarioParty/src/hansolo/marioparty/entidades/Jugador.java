@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import animations.Animation;
 import hansolo.mario.Juego;
 //import hansolo.marioparty.admin.Usuario;
 import hansolo.marioparty.graficos.Texturas;
@@ -17,6 +18,8 @@ public class Jugador {
 	private int y;
 
 	private BufferedImage spriteTablero;
+	private BufferedImage[] spriteCaminar;
+	private Animation animation;
 
 	private int numero;
 	private String user;
@@ -107,24 +110,33 @@ public class Jugador {
 	}
 
 	public void dibujar(Graphics g) {
-		g.drawImage(spriteTablero, x, y, null);
+		if (avanzando) {
+			this.animation.tick();
+			g.drawImage(animation.getCurrentFrame(), x+25, y+10, null);
+		} else
+			g.drawImage(spriteTablero, x, y, null);
 		g.drawString(String.valueOf(cantMovimientos), x, y - 20);
 	}
 
 	public void cargarSprites() {
 		switch (numero) {
 		case 1:
+			spriteCaminar = Texturas.mario;
 			spriteTablero = Texturas.jugador_1;
+			this.animation = new Animation(100, spriteCaminar);
+
 			break;
 		case 2:
+			spriteCaminar = Texturas.luigi;
 			spriteTablero = Texturas.jugador_2;
+			this.animation = new Animation(100, spriteCaminar);
 			break;
-		case 3:
-			spriteTablero = Texturas.jugador_3;
-			break;
-		case 4:
-			spriteTablero = Texturas.jugador_4;
-			break;
+//		case 3:
+//			spriteTablero = Texturas.jugador_3;
+//			break;
+//		case 4:
+//			spriteTablero = Texturas.jugador_4;
+//			break;
 		}
 	}
 
