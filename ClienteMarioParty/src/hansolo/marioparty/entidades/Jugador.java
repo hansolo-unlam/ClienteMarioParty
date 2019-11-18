@@ -12,6 +12,7 @@ import hansolo.marioparty.graficos.Texturas;
 //import hansolo.marioparty.items.DadoSimple;
 //import hansolo.marioparty.items.Item;
 import hansolo.marioparty.tablero.Casillero;
+import states.EnumEstadoJuego;
 
 public class Jugador {
 	private int x;
@@ -21,10 +22,15 @@ public class Jugador {
 	private BufferedImage[] spriteCaminarDerecha;
 	private BufferedImage[] spriteCaminarFrente;
 	private BufferedImage[] spriteCaminarEspalda;
+	private BufferedImage[] spriteFestejo;
+	private BufferedImage[] spriteLamento;
 	private Animation animationI;
 	private Animation animationD;
 	private Animation animationF;
 	private Animation animationE;
+	private Animation animationLamento;
+
+	private String estadoFinal;
 
 	private int numero;
 	private String user;
@@ -49,6 +55,7 @@ public class Jugador {
 	private boolean isBifurcacion = false;
 	private char direccion;
 	private BufferedImage[] spriteCaminarIzquierda;
+	private Animation animationFestejo;
 
 	public void setBifurcacion(boolean isBifurcacion) {
 		this.isBifurcacion = isBifurcacion;
@@ -115,7 +122,7 @@ public class Jugador {
 
 					}
 					posicion = posicion.getSiguiente().getCasillero();
-					}
+				}
 				isBifurcacion = false;
 				// posicion = posicion.getSiguiente().getCasillero();
 			}
@@ -138,29 +145,48 @@ public class Jugador {
 			switch (direccion) {
 			case 'n':
 				this.animationE.tick();
-				g.drawImage(animationE.getCurrentFrame(), x+20, y+10, null);
+				g.drawImage(animationE.getCurrentFrame(), x + 20, y + 10, null);
 				break;
-				
+
 			case 'e':
 				this.animationD.tick();
-				g.drawImage(animationD.getCurrentFrame(), x+25, y+10, null);
+				g.drawImage(animationD.getCurrentFrame(), x + 25, y + 10, null);
 				break;
-				
+
 			case 'o':
 				this.animationI.tick();
-				g.drawImage(animationI.getCurrentFrame(), x+15, y+10, null);
+				g.drawImage(animationI.getCurrentFrame(), x + 15, y + 10, null);
 				break;
-				
+
 			case 's':
 				this.animationF.tick();
-				g.drawImage(animationF.getCurrentFrame(), x+20, y+10, null);
+				g.drawImage(animationF.getCurrentFrame(), x + 20, y + 10, null);
 				break;
 
 			}
-			
-		} else
+
+		} else if (juego.getJuegoState().getSubEstado() == EnumEstadoJuego.FIN_TURNO
+				&& juego.getJuegoState().getTieneTurno().equals(this)) {
+			if (estadoFinal.equals("bueno")) {
+				this.animationFestejo.tick();
+				g.drawImage(animationFestejo.getCurrentFrame(), x + 20, y + 5, null);
+			} else {
+				this.animationLamento.tick();
+				g.drawImage(animationLamento.getCurrentFrame(), x + 20, y + 5, null);
+			}
+
+		} else {
 			g.drawImage(spriteTablero, x, y, null);
-		g.drawString(String.valueOf(cantMovimientos), x, y - 20);
+//			g.drawString(String.valueOf(cantMovimientos), x, y - 20);
+		}
+	}
+
+	public String getEstadoFinal() {
+		return estadoFinal;
+	}
+
+	public void setEstadoFinal(String estadoFinal) {
+		this.estadoFinal = estadoFinal;
 	}
 
 	public void cargarSprites() {
@@ -171,6 +197,10 @@ public class Jugador {
 			spriteCaminarFrente = Texturas.marioFrente;
 			spriteCaminarIzquierda = Texturas.marioIzquierda;
 			spriteTablero = Texturas.jugador_1;
+			spriteFestejo = Texturas.marioFestejo;
+			spriteLamento = Texturas.marioLamento;
+			this.animationLamento = new Animation(200, spriteLamento);
+			this.animationFestejo = new Animation(200, spriteFestejo);
 			this.animationF = new Animation(100, spriteCaminarFrente);
 			this.animationE = new Animation(100, spriteCaminarEspalda);
 			this.animationD = new Animation(100, spriteCaminarDerecha);
@@ -182,6 +212,10 @@ public class Jugador {
 			spriteCaminarEspalda = Texturas.luigiEspalda;
 			spriteCaminarIzquierda = Texturas.luigiIzquierda;
 			spriteTablero = Texturas.jugador_2;
+			spriteFestejo = Texturas.luigiFestejo;
+			spriteLamento = Texturas.luigiLamento;
+			this.animationLamento = new Animation(200, spriteLamento);
+			this.animationFestejo = new Animation(200, spriteFestejo);
 			this.animationF = new Animation(100, spriteCaminarFrente);
 			this.animationE = new Animation(100, spriteCaminarEspalda);
 			this.animationD = new Animation(100, spriteCaminarDerecha);

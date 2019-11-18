@@ -30,6 +30,7 @@ public class HurtoCasillero extends Casillero {
 
 	@Override
 	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
+		jugador.setEstadoFinal("bueno");
 		if (jugador.getMainUser().equals(jugador.getUser())) {
 			List<Jugador> jugadores = jugador.getJuego().getJugadores();
 

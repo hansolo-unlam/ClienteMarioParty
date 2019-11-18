@@ -71,6 +71,7 @@ public class EstrellaCasillero extends Casillero {
 //
 	private void venderEstrella(Jugador jugador, String juego) {
 
+		jugador.setEstadoFinal("bueno");
 		JsonObject jo = new JsonObject();
 		JsonObject jo1 = new JsonObject();
 		jo.addProperty("nombre", "ESTRELLA");

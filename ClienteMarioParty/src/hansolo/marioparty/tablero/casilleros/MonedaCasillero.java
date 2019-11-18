@@ -29,6 +29,11 @@ public class MonedaCasillero extends Casillero {
 
 	@Override
 	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
+		if(this.cantMonedas>0)
+			jugador.setEstadoFinal("bueno");
+		else
+			jugador.setEstadoFinal("malo");
+		
 		if (jugador.getMainUser().equals(jugador.getUser())) {
 			JsonObject jo = new JsonObject();
 			JsonObject jo1 = new JsonObject();

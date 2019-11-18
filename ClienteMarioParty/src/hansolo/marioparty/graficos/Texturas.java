@@ -65,6 +65,10 @@ public class Texturas {
 	public static BufferedImage[] marioIzquierda;
 	
 	public static BufferedImage[] marioDerecha;
+	
+	public static BufferedImage[] marioFestejo;
+	
+	public static BufferedImage[] marioLamento;
 
 	public static BufferedImage[] luigiDerecha;
 
@@ -73,6 +77,10 @@ public class Texturas {
 	public static BufferedImage[] luigiEspalda;
 	
 	public static BufferedImage[] luigiIzquierda;
+	
+	public static BufferedImage[] luigiFestejo;
+	
+	public static BufferedImage[] luigiLamento;
 
 	/*
 	 * Método que carga en todas las BufferedImages sus correspondientes texturas
@@ -201,6 +209,20 @@ public class Texturas {
 		marioIzquierda[2] = hojaMarioIzq.recortar(57, 0, 25, 35);
 		marioIzquierda[3] = hojaMarioIzq.recortar(87, 0, 25, 35);
 		
+		HojaSprites hojaMarioFestejo = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\mario ganador.png"));
+		marioFestejo = new BufferedImage[4];
+		marioFestejo[0] = hojaMarioFestejo.recortar(0, 0, 30, 35);
+		marioFestejo[1] = hojaMarioFestejo.recortar(30, 0, 30, 35);
+		marioFestejo[2] = hojaMarioFestejo.recortar(60, 0, 30, 35);
+		marioFestejo[3] = hojaMarioFestejo.recortar(90, 0, 30, 35);
+		
+		HojaSprites hojaMarioLamento = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\mario perdedor.png"));
+		marioLamento = new BufferedImage[4];
+		marioLamento[0] = hojaMarioLamento.recortar(0, 0, 32, 35);
+		marioLamento[1] = hojaMarioLamento.recortar(32, 0, 32, 35);
+		marioLamento[2] = hojaMarioLamento.recortar(64, 0, 32, 35);
+		marioLamento[3] = hojaMarioLamento.recortar(96, 0, 32, 35);
+		
 		HojaSprites hojaMarioFrenteEspalda = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\mario frente-espalda.png"));
 		marioFrente = new BufferedImage[4];
 		marioEspalda = new BufferedImage[4];
@@ -240,6 +262,19 @@ public class Texturas {
 		luigiDerecha[1] = hojaLuigiDerecha.recortar(15, 0, 16, 35);
 		luigiDerecha[2] = hojaLuigiDerecha.recortar(31, 0, 15, 35);
 		luigiDerecha[3] = hojaLuigiDerecha.recortar(46, 0, 15, 35);
+		
+		HojaSprites hojaLuigiFestejo = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\luigi ganador.png"));
+		luigiFestejo = new BufferedImage[4];
+		luigiFestejo[0] = hojaLuigiFestejo.recortar(0, 0, 26, 40);
+		luigiFestejo[1] = hojaLuigiFestejo.recortar(26, 0, 26, 40);
+		luigiFestejo[2] = hojaLuigiFestejo.recortar(52, 0, 26, 40);
+		luigiFestejo[3] = hojaLuigiFestejo.recortar(78, 0, 26, 40);
+		
+		HojaSprites hojaLuigiLamento = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\luigi perdedor.png"));
+		luigiLamento = new BufferedImage[3];
+		luigiLamento[0] = hojaLuigiLamento.recortar(0, 0, 33, 40);
+		luigiLamento[1] = hojaLuigiLamento.recortar(33, 0, 33, 40);
+		luigiLamento[2] = hojaLuigiLamento.recortar(66, 0, 33, 40);
 		
 		// --------------MINIJUEGO------------------------
 
