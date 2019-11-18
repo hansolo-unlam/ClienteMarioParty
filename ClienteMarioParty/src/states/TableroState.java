@@ -2,11 +2,13 @@ package states;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JOptionPane;
 
 import com.google.gson.JsonObject;
 
+import animations.Animation;
 import cliente.Cliente;
 import hansolo.mario.Juego;
 import hansolo.marioparty.entidades.Jugador;
@@ -18,6 +20,8 @@ import hansolo.marioparty.ui.ImageButton;;
 
 public class TableroState extends State {
 	private Tablero tablero;
+	private Animation animation;
+	private BufferedImage[] dado;
 
 	public Tablero getTablero() {
 		return tablero;
@@ -47,6 +51,9 @@ public class TableroState extends State {
 		administradorUI = new AdministradorUI(juego);
 		this.userJugador = this.tieneTurno.getUser();
 		juego.getMouseManager().settearAdministradorUI(administradorUI);
+		
+		dado = Texturas.dado;
+		animation = new Animation(100, dado);
 
 		// esto deberia hacerse cuando se reciba un mensaje que indique que el jugador
 		// tiene el turno
@@ -162,7 +169,10 @@ public class TableroState extends State {
 			} else if (subEstado == EnumEstadoJuego.VIENDO_DADO) {
 				g.drawString(userJugador + ": sacaste un " + tieneTurno.getCantMovimientos() + " en el dado.", 100,
 						750);
+				this.animation.tick();
+				g.drawImage(animation.getCurrentFrame(), 850, 475, null);
 			} else if (subEstado == EnumEstadoJuego.MOVIENDOSE) {
+				g.drawImage(dado[tieneTurno.getCantMovimientos()-1], 850, 475, null);
 				g.drawString("a " + userJugador + " le quedan " + tieneTurno.getCantMovimientos() + " movimientos.",
 						100, 750);
 

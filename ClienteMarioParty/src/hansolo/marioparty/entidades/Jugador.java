@@ -18,8 +18,13 @@ public class Jugador {
 	private int y;
 
 	private BufferedImage spriteTablero;
-	private BufferedImage[] spriteCaminar;
-	private Animation animation;
+	private BufferedImage[] spriteCaminarDerecha;
+	private BufferedImage[] spriteCaminarFrente;
+	private BufferedImage[] spriteCaminarEspalda;
+	private Animation animationI;
+	private Animation animationD;
+	private Animation animationF;
+	private Animation animationE;
 
 	private int numero;
 	private String user;
@@ -42,6 +47,8 @@ public class Jugador {
 	// ventana
 	private String mainUser;
 	private boolean isBifurcacion = false;
+	private char direccion;
+	private BufferedImage[] spriteCaminarIzquierda;
 
 	public void setBifurcacion(boolean isBifurcacion) {
 		this.isBifurcacion = isBifurcacion;
@@ -90,8 +97,25 @@ public class Jugador {
 				juego.pasarTurno();
 				// System.out.println("ACÁ DEBERÍA TERMINAR EL TURNO");
 			} else {
-				if (!isBifurcacion)
+				if (!isBifurcacion) {
+					switch (posicion.getSiguiente().getDireccion()) {
+					case N:
+						this.direccion = 'n';
+						break;
+
+					case O:
+						this.direccion = 'o';
+						break;
+					case E:
+						this.direccion = 'e';
+						break;
+					case S:
+						this.direccion = 's';
+						break;
+
+					}
 					posicion = posicion.getSiguiente().getCasillero();
+					}
 				isBifurcacion = false;
 				// posicion = posicion.getSiguiente().getCasillero();
 			}
@@ -103,16 +127,37 @@ public class Jugador {
 		}
 	}
 
-	private void settearSiguiente(Casillero posicion) {
-		if (!isBifurcacion)
-			posicion = posicion.getSiguiente().getCasillero();
-		isBifurcacion = false;
-	}
+//	private void settearSiguiente(Casillero posicion) {
+//		if (!isBifurcacion)
+//			posicion = posicion.getSiguiente().getCasillero();
+//		isBifurcacion = false;
+//	}
 
 	public void dibujar(Graphics g) {
 		if (avanzando) {
-			this.animation.tick();
-			g.drawImage(animation.getCurrentFrame(), x+25, y+10, null);
+			switch (direccion) {
+			case 'n':
+				this.animationE.tick();
+				g.drawImage(animationE.getCurrentFrame(), x+20, y+10, null);
+				break;
+				
+			case 'e':
+				this.animationD.tick();
+				g.drawImage(animationD.getCurrentFrame(), x+25, y+10, null);
+				break;
+				
+			case 'o':
+				this.animationI.tick();
+				g.drawImage(animationI.getCurrentFrame(), x+15, y+10, null);
+				break;
+				
+			case 's':
+				this.animationF.tick();
+				g.drawImage(animationF.getCurrentFrame(), x+20, y+10, null);
+				break;
+
+			}
+			
 		} else
 			g.drawImage(spriteTablero, x, y, null);
 		g.drawString(String.valueOf(cantMovimientos), x, y - 20);
@@ -121,15 +166,26 @@ public class Jugador {
 	public void cargarSprites() {
 		switch (numero) {
 		case 1:
-			spriteCaminar = Texturas.mario;
+			spriteCaminarDerecha = Texturas.marioDerecha;
+			spriteCaminarEspalda = Texturas.marioEspalda;
+			spriteCaminarFrente = Texturas.marioFrente;
+			spriteCaminarIzquierda = Texturas.marioIzquierda;
 			spriteTablero = Texturas.jugador_1;
-			this.animation = new Animation(100, spriteCaminar);
-
+			this.animationF = new Animation(100, spriteCaminarFrente);
+			this.animationE = new Animation(100, spriteCaminarEspalda);
+			this.animationD = new Animation(100, spriteCaminarDerecha);
+			this.animationI = new Animation(100, spriteCaminarIzquierda);
 			break;
 		case 2:
-			spriteCaminar = Texturas.luigi;
+			spriteCaminarDerecha = Texturas.luigiDerecha;
+			spriteCaminarFrente = Texturas.luigiFrente;
+			spriteCaminarEspalda = Texturas.luigiEspalda;
+			spriteCaminarIzquierda = Texturas.luigiIzquierda;
 			spriteTablero = Texturas.jugador_2;
-			this.animation = new Animation(100, spriteCaminar);
+			this.animationF = new Animation(100, spriteCaminarFrente);
+			this.animationE = new Animation(100, spriteCaminarEspalda);
+			this.animationD = new Animation(100, spriteCaminarDerecha);
+			this.animationI = new Animation(100, spriteCaminarIzquierda);
 			break;
 //		case 3:
 //			spriteTablero = Texturas.jugador_3;
@@ -174,6 +230,23 @@ public class Jugador {
 	public void startAvanzar() {
 		// Setteo la posición siguiente y lo hago avanzar un pixel así no entra en el
 		// primer if del .dibujar();
+		switch (posicion.getSiguiente().getDireccion()) {
+		case N:
+			this.direccion = 'n';
+			break;
+
+		case O:
+			this.direccion = 'o';
+			break;
+		case E:
+			this.direccion = 'e';
+			break;
+		case S:
+			this.direccion = 's';
+			break;
+
+		}
+		posicion.getSiguiente().getDireccion();
 		posicion = posicion.getSiguiente().getCasillero();
 
 		avanzarHaciaPosicion();
@@ -260,17 +333,21 @@ public class Jugador {
 
 		switch (direccion) {
 		case 'n':
+			this.direccion = direccion;
 			posicion = posicion.getNorte().getCasillero();
 			break;
 		case 's':
+			this.direccion = direccion;
 			posicion = posicion.getSur().getCasillero();
 			break;
 
 		case 'e':
+			this.direccion = direccion;
 			posicion = posicion.getEste().getCasillero();
 			break;
 
 		case 'o':
+			this.direccion = direccion;
 			posicion = posicion.getOeste().getCasillero();
 			break;
 		}
