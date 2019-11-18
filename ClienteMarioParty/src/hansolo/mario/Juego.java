@@ -281,10 +281,12 @@ public class Juego implements Runnable {
 
 	public void informarMovimientos(int cant) {
 		tableroState.getTieneTurno().setCantMovimientos(cant);
+		tableroState.setSubEstado(EnumEstadoJuego.VIENDO_DADO);
 	}
 
 	public void informarAvanzar() {
 		tableroState.getTieneTurno().startAvanzar();
+		tableroState.setSubEstado(EnumEstadoJuego.MOVIENDOSE);
 	}
 
 	public void actualizarMonedas(int monedas) {
