@@ -191,7 +191,7 @@ public class Jugador {
 
 	public void cargarSprites() {
 		switch (numero) {
-		case 4:
+		case 1:
 			spriteCaminarDerecha = Texturas.marioDerecha;
 			spriteCaminarEspalda = Texturas.marioEspalda;
 			spriteCaminarFrente = Texturas.marioFrente;
@@ -237,7 +237,7 @@ public class Jugador {
 			this.animationI = new Animation(100, spriteCaminarIzquierda);
 			
 			break;
-		case 1:
+		case 4:
 			spriteTablero = Texturas.jugador_4;
 			spriteCaminarDerecha = Texturas.yoshiDerecha;
 			spriteCaminarFrente = Texturas.yoshiFrente;
