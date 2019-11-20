@@ -93,6 +93,18 @@ public class Texturas {
 	public static BufferedImage[] peachFestejo;
 	
 	public static BufferedImage[] peachLamento;
+	
+	public static BufferedImage[] yoshiDerecha;
+
+	public static BufferedImage[] yoshiFrente;
+	
+	public static BufferedImage[] yoshiEspalda;
+	
+	public static BufferedImage[] yoshiIzquierda;
+	
+	public static BufferedImage[] yoshiFestejo;
+	
+	public static BufferedImage[] yoshiLamento;
 
 	/*
 	 * Método que carga en todas las BufferedImages sus correspondientes texturas
@@ -325,6 +337,42 @@ public class Texturas {
 		peachLamento[1] = hojaPeachLamento.recortar(32, 0, 28, 43);
 		peachLamento[2] = hojaPeachLamento.recortar(62, 0, 30, 43);
 		peachLamento[3] = hojaPeachLamento.recortar(92, 0, 30, 43);
+		
+		HojaSprites hojaYoshiFrente = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\yoshi frente.png"));
+		yoshiFrente = new BufferedImage[3];
+		yoshiFrente[0] = hojaYoshiFrente.recortar(0, 0, 22, 43);
+		yoshiFrente[1] = hojaYoshiFrente.recortar(22, 0, 22, 43);
+		yoshiFrente[2] = hojaYoshiFrente.recortar(44, 0, 22, 43);
+		
+		HojaSprites hojaYoshiEspalda = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\yoshi espalda.png"));
+		yoshiEspalda = new BufferedImage[3];
+		yoshiEspalda[0] = hojaYoshiEspalda.recortar(0, 0, 22, 43);
+		yoshiEspalda[1] = hojaYoshiEspalda.recortar(22, 0, 22, 43);
+		yoshiEspalda[2] = hojaYoshiEspalda.recortar(44, 0, 22, 43);
+		
+		HojaSprites hojaYoshiIzquierda = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\yoshi izq.png"));
+		yoshiIzquierda = new BufferedImage[3];
+		yoshiIzquierda[0] = hojaYoshiIzquierda.recortar(0, 0, 26, 43);
+		yoshiIzquierda[1] = hojaYoshiIzquierda.recortar(26, 0, 26, 43);
+		yoshiIzquierda[2] = hojaYoshiIzquierda.recortar(52, 0, 26, 43);
+		
+		HojaSprites hojaYoshiDerecha = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\yoshi derecha.png"));
+		yoshiDerecha = new BufferedImage[3];
+		yoshiDerecha[0] = hojaYoshiDerecha.recortar(0, 0, 26, 43);
+		yoshiDerecha[1] = hojaYoshiDerecha.recortar(26, 0, 26, 43);
+		yoshiDerecha[2] = hojaYoshiDerecha.recortar(52, 0, 26, 43);
+		
+		HojaSprites hojaYoshiLamento = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\yoshi lamento.png"));
+		yoshiLamento = new BufferedImage[2];
+		yoshiLamento[0] = hojaYoshiLamento.recortar(0, 0, 40, 25);
+		yoshiLamento[1] = hojaYoshiLamento.recortar(40, 0, 40, 25);
+		
+		HojaSprites hojaYoshiFestejo = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\yoshi festejo.png"));
+		yoshiFestejo = new BufferedImage[4];
+		yoshiFestejo[0] = hojaYoshiFestejo.recortar(0, 0, 21, 43);
+		yoshiFestejo[1] = hojaYoshiFestejo.recortar(21, 0, 19, 43);
+		yoshiFestejo[2] = hojaYoshiFestejo.recortar(40, 0, 26, 43);
+		yoshiFestejo[3] = hojaYoshiFestejo.recortar(67, 0, 33, 43);
 		
 		// --------------MINIJUEGO------------------------
 
