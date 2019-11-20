@@ -81,6 +81,18 @@ public class Texturas {
 	public static BufferedImage[] luigiFestejo;
 	
 	public static BufferedImage[] luigiLamento;
+	
+	public static BufferedImage[] peachDerecha;
+
+	public static BufferedImage[] peachFrente;
+	
+	public static BufferedImage[] peachEspalda;
+	
+	public static BufferedImage[] peachIzquierda;
+	
+	public static BufferedImage[] peachFestejo;
+	
+	public static BufferedImage[] peachLamento;
 
 	/*
 	 * Método que carga en todas las BufferedImages sus correspondientes texturas
@@ -275,6 +287,44 @@ public class Texturas {
 		luigiLamento[0] = hojaLuigiLamento.recortar(0, 0, 33, 40);
 		luigiLamento[1] = hojaLuigiLamento.recortar(33, 0, 33, 40);
 		luigiLamento[2] = hojaLuigiLamento.recortar(66, 0, 33, 40);
+		
+		HojaSprites hojaPeachIzquierda = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\peach izquierda.png"));
+		peachIzquierda = new BufferedImage[4];
+		peachIzquierda[0] = hojaPeachIzquierda.recortar(0, 0, 30, 43);
+		peachIzquierda[1] = hojaPeachIzquierda.recortar(30, 0, 28, 43);
+		peachIzquierda[2] = hojaPeachIzquierda.recortar(57, 0, 28, 43);
+		peachIzquierda[3] = hojaPeachIzquierda.recortar(85, 0, 30, 43);
+		
+		HojaSprites hojaPeachDerecha = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\peach derecha.png"));
+		peachDerecha = new BufferedImage[4];
+		peachDerecha[0] = hojaPeachDerecha.recortar(0, 0, 30, 43);
+		peachDerecha[1] = hojaPeachDerecha.recortar(31, 0, 28, 43);
+		peachDerecha[2] = hojaPeachDerecha.recortar(59, 0, 26, 43);
+		peachDerecha[3] = hojaPeachDerecha.recortar(87, 0, 29, 43);
+		
+		HojaSprites hojaPeachEspalda = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\peach espalda.png"));
+		peachEspalda = new BufferedImage[2];
+		peachEspalda[0] = hojaPeachEspalda.recortar(0, 0, 30, 43);
+		peachEspalda[1] = hojaPeachEspalda.recortar(30, 0, 30, 43);
+		
+		HojaSprites hojaPeachFrente = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\peach frente.png"));
+		peachFrente = new BufferedImage[2];
+		peachFrente[0] = hojaPeachFrente.recortar(0, 0, 30, 42);
+		peachFrente[1] = hojaPeachFrente.recortar(30, 0, 30, 42);
+	
+		HojaSprites hojaPeachFestejo = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\peach festejo.png"));
+		peachFestejo = new BufferedImage[4];
+		peachFestejo[0] = hojaPeachFestejo.recortar(0, 0, 25, 43);
+		peachFestejo[1] = hojaPeachFestejo.recortar(25, 0, 28, 43);
+		peachFestejo[2] = hojaPeachFestejo.recortar(58, 0, 25, 43);
+		peachFestejo[3] = hojaPeachFestejo.recortar(84, 0, 28, 43);
+		
+		HojaSprites hojaPeachLamento = new HojaSprites(ImageLoader.cargarImagen("recursos\\texturas\\peach lamento.png"));
+		peachLamento = new BufferedImage[4];
+		peachLamento[0] = hojaPeachLamento.recortar(0, 0, 28, 43);
+		peachLamento[1] = hojaPeachLamento.recortar(32, 0, 28, 43);
+		peachLamento[2] = hojaPeachLamento.recortar(62, 0, 30, 43);
+		peachLamento[3] = hojaPeachLamento.recortar(92, 0, 30, 43);
 		
 		// --------------MINIJUEGO------------------------
 
