@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import audio.MusicPlayer;
 import states.*;
 import hansolo.marioparty.entidades.Jugador;
 import hansolo.marioparty.graficos.*;
@@ -48,7 +49,9 @@ public class Juego implements Runnable {
 	private Graphics g;
 
 	private BufferedImage background;
-	private Tablero tablero = new Tablero("./recursos/map0.txt", this);;
+	private Tablero tablero = new Tablero("./recursos/map0.txt", this);
+	
+	private MusicPlayer musicPlayer = new MusicPlayer("./recursos/audio/musica background tablero.wav");
 
 	private String id;
 	private String user;
@@ -65,7 +68,7 @@ public class Juego implements Runnable {
 		}
 		mouseManager = new MouseManager();
 		keyManager = new KeyManager();
-
+		
 	}
 
 	/*
@@ -80,6 +83,7 @@ public class Juego implements Runnable {
 		ejecutando = true;
 		thread = new Thread(this);
 		thread.start();
+		musicPlayer.start();
 	}
 
 	public synchronized void stop() {
@@ -93,6 +97,7 @@ public class Juego implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	/*
@@ -224,6 +229,10 @@ public class Juego implements Runnable {
 	 */
 	public void pasarTurno() {
 		tableroState.handleTerminoTurno();
+	}
+
+	public MusicPlayer getMusicPlayer() {
+		return musicPlayer;
 	}
 
 	public void iniciarMinijuego() {

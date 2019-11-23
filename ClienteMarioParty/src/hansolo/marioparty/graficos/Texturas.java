@@ -28,7 +28,7 @@ public class Texturas {
 			casillero_conexion_oeste_in;
 
 	// botones
-	public static BufferedImage[] btnTirarDado1, btnTirarDado2, btnTirarDado3, btnTirarDado4, btnTerminarTurno;
+	public static BufferedImage[] btnTirarDado1, btnTirarDado2, btnTirarDado3, btnTirarDado4, btnTerminarTurno, btnMusica;
 
 	// flechas
 	public static BufferedImage[] flecha_arriba, flecha_abajo, flecha_izquierda, flecha_derecha;
@@ -144,6 +144,13 @@ public class Texturas {
 		// btnTerminarTurno[0] = hojaBotonTerminarTurno.recortar(0, 0, 115, 32);
 		// btnTerminarTurno[1] = hojaBotonTerminarTurno.recortar(0, 32, 115, 32);
 
+		HojaSprites hojaBotonMusica = new HojaSprites(
+				ImageLoader.cargarImagen("recursos/texturas/btn musica.png"));
+		btnMusica = new BufferedImage[2];
+		btnMusica[0] = hojaBotonMusica.recortar(0, 0, 84, 78);
+		btnMusica[1] = hojaBotonMusica.recortar(0, 0, 84, 78);
+
+		
 		// jugadores
 		HojaSprites hojaJugador1 = new HojaSprites(
 				ImageLoader.cargarImagen("recursos/texturas/jugadores/jugador1/sprite-tablero.png"));

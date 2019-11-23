@@ -22,6 +22,7 @@ public class TableroState extends State {
 	private Tablero tablero;
 	private Animation animation;
 	private BufferedImage[] dado;
+	private boolean musicPlaying = true;
 
 	public Tablero getTablero() {
 		return tablero;
@@ -103,6 +104,28 @@ public class TableroState extends State {
 					}
 
 				}));
+
+		administradorUI.agregarObjeto("btnApagarSonido",
+				new ImageButton(20, 60, 84, 78, Texturas.btnMusica, new ClickListener() {
+
+					@Override
+					public void onClick() {
+						juego.getMusicPlayer().pausar();
+						musicPlaying = false;
+					}
+
+				}));
+
+		administradorUI.agregarObjeto("btnActivarSonido",
+				new ImageButton(20, 60, 84, 78, Texturas.btnMusica, new ClickListener() {
+
+					@Override
+					public void onClick() {
+						juego.getMusicPlayer().reiniciar();
+						musicPlaying = true;
+					}
+
+				}));
 	}
 
 	@Override
@@ -113,6 +136,15 @@ public class TableroState extends State {
 
 		for (Jugador j : juego.getJugadores())
 			j.calcular();
+
+		if (musicPlaying) {
+			administradorUI.getObjetos().get("btnApagarSonido").setHidden(false);
+			administradorUI.getObjetos().get("btnActivarSonido").setHidden(true);
+		} else {
+			administradorUI.getObjetos().get("btnApagarSonido").setHidden(true);
+			administradorUI.getObjetos().get("btnActivarSonido").setHidden(false);
+		}
+
 		if (tieneTurno.getUser().equals(tieneTurno.getMainUser())) {
 			if (subEstado == EnumEstadoJuego.TIEMPO_DE_ACCIONES) {
 				administradorUI.getObjetos().get("btnTirarDado").setHidden(false);
@@ -190,27 +222,6 @@ public class TableroState extends State {
 	public void setSubEstado(EnumEstadoJuego subEstado) {
 		this.subEstado = subEstado;
 	}
-
-	// en el server
-//	public void pasarTurno() {
-//		int index = juego.getJugadores().indexOf(tieneTurno);
-//		index++;
-//		
-//		if (index < juego.getJugadores().size())
-//			tieneTurno = juego.getJugadores().get(index);
-//		else {
-//			index = 0;
-//			tieneTurno = juego.getJugadores().get(0);
-//			ronda++;
-//			juego.iniciarMinijuego();
-//		}
-//		
-//		if(tieneTurno.isPierdeTurno()) {
-//			this.pasarTurno();
-//		}
-//
-//		subEstado = EnumEstadoJuego.TIEMPO_DE_ACCIONES;
-//	}
 
 	public void handleTerminoTurno() {
 		subEstado = EnumEstadoJuego.FIN_TURNO;
