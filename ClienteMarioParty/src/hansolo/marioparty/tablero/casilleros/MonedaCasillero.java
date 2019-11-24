@@ -22,7 +22,9 @@ import hansolo.marioparty.ui.AdministradorUI;
  *
  */
 public class MonedaCasillero extends Casillero {
-	private EfectoSonido efecto = new EfectoSonido(AudioFiles.moneda);
+	private EfectoSonido efectoGana = new EfectoSonido(AudioFiles.moneda);
+	private EfectoSonido efectoPierde = new EfectoSonido(AudioFiles.perder_moneda);
+	
 	private int cantMonedas; // positivo o negativo
 
 	public MonedaCasillero(int id, int signo) {
@@ -32,14 +34,17 @@ public class MonedaCasillero extends Casillero {
 
 	@Override
 	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
-		efecto.resetear();
-		if(this.cantMonedas>0) {
-			jugador.setEstadoFinal("bueno");
-			efecto.reproducir();
-			}
-		else
-			jugador.setEstadoFinal("malo");
 		
+		if(this.cantMonedas>0) {
+			efectoGana.resetear();
+			jugador.setEstadoFinal("bueno");
+			efectoGana.reproducir();
+			}
+		else {
+			efectoPierde.resetear();
+			jugador.setEstadoFinal("malo");
+			efectoPierde.reproducir();
+		}
 		if (jugador.getMainUser().equals(jugador.getUser())) {
 			JsonObject jo = new JsonObject();
 			JsonObject jo1 = new JsonObject();

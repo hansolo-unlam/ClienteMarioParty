@@ -30,5 +30,9 @@ public class AudioFiles {
 	
 	public static String moneda = "./recursos/audio/moneda.wav";
 	
+	public static String perder_moneda = "./recursos/audio/perder moneda.wav";
+	
 	public static String estrella = "./recursos/audio/estrella.wav";
+
+	public static String perder_turno = "./recursos/audio/perder turno.wav";
 }

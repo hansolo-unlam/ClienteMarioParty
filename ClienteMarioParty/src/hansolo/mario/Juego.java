@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import audio.AudioFiles;
+import audio.EfectoSonido;
 import audio.MusicPlayer;
 import states.*;
 import hansolo.marioparty.entidades.Jugador;
@@ -56,6 +57,8 @@ public class Juego implements Runnable {
 
 	private String id;
 	private String user;
+	
+	private EfectoSonido efectoPerderTurno = new EfectoSonido(AudioFiles.perder_turno);
 
 	public Juego(ArrayList<String> users, String id, String user) {
 		Texturas.init();
@@ -327,6 +330,7 @@ public class Juego implements Runnable {
 	}
 
 	public void randomMalo(int indice) {
+		efectoPerderTurno.resetear();
 		JFrame frame = new JFrame();
 		switch (indice) {
 		case 0:
@@ -376,6 +380,7 @@ public class Juego implements Runnable {
 		case 7:
 			tableroState.getTieneTurno().setPierdeTurno(true);
 			JOptionPane.showMessageDialog(frame, tableroState.getTieneTurno().getUser() + " perdio un turno");
+			efectoPerderTurno.reproducir();
 		}
 
 	}
