@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import animations.Animation;
+import audio.AudioFiles;
+import audio.EfectoSonido;
 import hansolo.mario.Juego;
 //import hansolo.marioparty.admin.Usuario;
 import hansolo.marioparty.graficos.Texturas;
+import hansolo.marioparty.input.KeyManager;
 //import hansolo.marioparty.items.DadoSimple;
 //import hansolo.marioparty.items.Item;
 import hansolo.marioparty.tablero.Casillero;
@@ -29,7 +32,10 @@ public class Jugador {
 	private Animation animationF;
 	private Animation animationE;
 	private Animation animationLamento;
-
+	
+	private EfectoSonido efectoLamento;
+	private EfectoSonido efectoFestejo;
+	
 	private String estadoFinal;
 
 	private int numero;
@@ -85,6 +91,7 @@ public class Jugador {
 		this.cantMovimientos = 0;
 
 		cargarSprites();
+		cargarAudios();
 	}
 
 	public void calcular() {
@@ -168,15 +175,18 @@ public class Jugador {
 		} else if (juego.getJuegoState().getSubEstado() == EnumEstadoJuego.FIN_TURNO
 				&& juego.getJuegoState().getTieneTurno().equals(this)) {
 			if (estadoFinal.equals("bueno")) {
+				efectoFestejo.reproducir();
 				this.animationFestejo.tick();
 				g.drawImage(animationFestejo.getCurrentFrame(), x + 20, y + 5, null);
 			} else {
+				efectoLamento.reproducir();
 				this.animationLamento.tick();
 				g.drawImage(animationLamento.getCurrentFrame(), x + 20, y + 5, null);
 			}
 
 		} else {
 			g.drawImage(spriteTablero, x, y, null);
+	
 //			g.drawString(String.valueOf(cantMovimientos), x, y - 20);
 		}
 	}
@@ -255,6 +265,28 @@ public class Jugador {
 		}
 	}
 
+	public void cargarAudios() {
+		switch (numero) {
+		case 1:
+			this.efectoFestejo = new EfectoSonido(AudioFiles.mario_alegre);
+			this.efectoLamento = new EfectoSonido(AudioFiles.mario_triste);
+			break;
+		case 2:
+			this.efectoFestejo = new EfectoSonido(AudioFiles.luigi_alegre);
+			this.efectoLamento = new EfectoSonido(AudioFiles.luigi_triste);
+			break;
+		case 3:
+			this.efectoFestejo = new EfectoSonido(AudioFiles.peach_alegre);
+			this.efectoLamento = new EfectoSonido(AudioFiles.peach_triste);
+			
+			break;
+		case 4:
+			this.efectoFestejo = new EfectoSonido(AudioFiles.yoshi_alegre);
+			this.efectoLamento = new EfectoSonido(AudioFiles.yoshi_triste);
+			break;
+		}
+	}
+	
 	private void avanzarHaciaPosicion() {
 		if (posicion.getX() > x)
 			x++;
@@ -413,4 +445,11 @@ public class Jugador {
 
 	}
 
+	public void resetearSonidos() {
+		efectoFestejo.resetear();
+		efectoLamento.resetear();
+		
+	}
+
+	
 }

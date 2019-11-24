@@ -17,7 +17,7 @@ public class KeyManager implements KeyListener {
 	}
 
 	public void calcular() {
-
+		
 		espacio = teclas[KeyEvent.VK_SPACE];
 		enter = teclas[KeyEvent.VK_ENTER];
 

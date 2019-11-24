@@ -36,6 +36,7 @@ public class TableroState extends State {
 		this.tieneTurno = juego.getJugadores().get(tieneTurno);
 		this.userJugador = this.tieneTurno.getUser();
 		this.subEstado = EnumEstadoJuego.TIEMPO_DE_ACCIONES;
+		this.tieneTurno.resetearSonidos();
 	}
 
 	String userJugador;
@@ -134,6 +135,7 @@ public class TableroState extends State {
 		tablero.calcular();
 		administradorUI.calcular();
 
+
 		for (Jugador j : juego.getJugadores())
 			j.calcular();
 
@@ -173,6 +175,7 @@ public class TableroState extends State {
 		}
 	}
 
+
 	@Override
 	public void dibujar(Graphics g) {
 		// acá dibujo tablero, jugadores, etc
@@ -185,7 +188,6 @@ public class TableroState extends State {
 			g.drawString("Estrellas de " + userJugador + ": " + tieneTurno.getEstrellas(), 20, 45);
 		}
 		g.drawString("Ronda: " + ronda, 750, 20);
-
 		tablero.predibujar(g);
 		tablero.dibujar(g);
 		administradorUI.dibujar(g);

@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import audio.AudioFiles;
 import audio.MusicPlayer;
 import states.*;
 import hansolo.marioparty.entidades.Jugador;
@@ -51,7 +52,7 @@ public class Juego implements Runnable {
 	private BufferedImage background;
 	private Tablero tablero = new Tablero("./recursos/map0.txt", this);
 	
-	private MusicPlayer musicPlayer = new MusicPlayer("./recursos/audio/musica background tablero.wav");
+	private MusicPlayer musicPlayer = new MusicPlayer(AudioFiles.background_tablero);
 
 	private String id;
 	private String user;
