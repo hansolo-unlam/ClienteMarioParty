@@ -32,10 +32,11 @@ public class Jugador {
 	private Animation animationF;
 	private Animation animationE;
 	private Animation animationLamento;
-	
+
 	private EfectoSonido efectoLamento;
 	private EfectoSonido efectoFestejo;
-	
+	private EfectoSonido efectoReady;
+
 	private String estadoFinal;
 
 	private int numero;
@@ -175,7 +176,7 @@ public class Jugador {
 		} else if (juego.getJuegoState().getSubEstado() == EnumEstadoJuego.FIN_TURNO
 				&& juego.getJuegoState().getTieneTurno().equals(this)) {
 			if (estadoFinal.equals("bueno")) {
-				efectoFestejo.reproducir();
+
 				this.animationFestejo.tick();
 				g.drawImage(animationFestejo.getCurrentFrame(), x + 20, y + 5, null);
 			} else {
@@ -186,9 +187,23 @@ public class Jugador {
 
 		} else {
 			g.drawImage(spriteTablero, x, y, null);
-	
-//			g.drawString(String.valueOf(cantMovimientos), x, y - 20);
+
 		}
+	}
+
+	public void reproducirAudios() {
+
+		if (juego.getJuegoState().getSubEstado() == EnumEstadoJuego.FIN_TURNO
+				&& juego.getJuegoState().getTieneTurno().equals(this)) {
+			if (estadoFinal.equals("bueno"))
+				efectoFestejo.reproducir();
+			else
+				efectoLamento.reproducir();
+		} else if (juego.getJuegoState().getSubEstado() == EnumEstadoJuego.TIEMPO_DE_ACCIONES
+				&& juego.getJuegoState().getTieneTurno().equals(this)) {
+			efectoReady.reproducir();
+		}
+
 	}
 
 	public String getEstadoFinal() {
@@ -245,7 +260,7 @@ public class Jugador {
 			this.animationE = new Animation(100, spriteCaminarEspalda);
 			this.animationD = new Animation(100, spriteCaminarDerecha);
 			this.animationI = new Animation(100, spriteCaminarIzquierda);
-			
+
 			break;
 		case 4:
 			spriteTablero = Texturas.jugador_4;
@@ -270,23 +285,27 @@ public class Jugador {
 		case 1:
 			this.efectoFestejo = new EfectoSonido(AudioFiles.mario_alegre);
 			this.efectoLamento = new EfectoSonido(AudioFiles.mario_triste);
+			this.efectoReady = new EfectoSonido(AudioFiles.mario_ready);
 			break;
 		case 2:
 			this.efectoFestejo = new EfectoSonido(AudioFiles.luigi_alegre);
 			this.efectoLamento = new EfectoSonido(AudioFiles.luigi_triste);
+			this.efectoReady = new EfectoSonido(AudioFiles.luigi_ready);
 			break;
 		case 3:
 			this.efectoFestejo = new EfectoSonido(AudioFiles.peach_alegre);
 			this.efectoLamento = new EfectoSonido(AudioFiles.peach_triste);
-			
+			this.efectoReady = new EfectoSonido(AudioFiles.peach_ready);
+
 			break;
 		case 4:
 			this.efectoFestejo = new EfectoSonido(AudioFiles.yoshi_alegre);
 			this.efectoLamento = new EfectoSonido(AudioFiles.yoshi_triste);
+			this.efectoReady = new EfectoSonido(AudioFiles.yoshi_ready);
 			break;
 		}
 	}
-	
+
 	private void avanzarHaciaPosicion() {
 		if (posicion.getX() > x)
 			x++;
@@ -448,8 +467,7 @@ public class Jugador {
 	public void resetearSonidos() {
 		efectoFestejo.resetear();
 		efectoLamento.resetear();
-		
+		efectoReady.resetear();
 	}
 
-	
 }

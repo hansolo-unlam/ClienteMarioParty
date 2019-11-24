@@ -20,4 +20,12 @@ public class AudioFiles {
 	
 	public static String yoshi_alegre = "./recursos/audio/yoshi alegre.wav";
 	
+	public static String mario_ready = "./recursos/audio/mario ready.wav";
+	
+	public static String luigi_ready = "./recursos/audio/luigi ready.wav";
+	
+	public static String peach_ready = "./recursos/audio/peach ready.wav";
+	
+	public static String yoshi_ready = "./recursos/audio/yoshi ready.wav";
+	
 }

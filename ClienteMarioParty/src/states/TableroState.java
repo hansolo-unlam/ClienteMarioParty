@@ -135,9 +135,10 @@ public class TableroState extends State {
 		tablero.calcular();
 		administradorUI.calcular();
 
-
-		for (Jugador j : juego.getJugadores())
+		for (Jugador j : juego.getJugadores()) {
 			j.calcular();
+			j.reproducirAudios();
+		}
 
 		if (musicPlaying) {
 			administradorUI.getObjetos().get("btnApagarSonido").setHidden(false);
@@ -174,7 +175,6 @@ public class TableroState extends State {
 			administradorUI.getObjetos().get("btnTerminarTurno").setHidden(true);
 		}
 	}
-
 
 	@Override
 	public void dibujar(Graphics g) {
