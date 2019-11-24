@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 
 import com.google.gson.JsonObject;
 
+import audio.AudioFiles;
+import audio.EfectoSonido;
 import cliente.Cliente;
 import hansolo.marioparty.entidades.Jugador;
 import hansolo.marioparty.graficos.Texturas;
@@ -31,6 +33,7 @@ public class EstrellaCasillero extends Casillero {
 	public final static int PRECIO_ESTRELLA = 30;
 	private boolean tieneEstrella;
 	private Tablero tablero;
+	private EfectoSonido efecto = new EfectoSonido(AudioFiles.estrella);
 
 	public EstrellaCasillero(int id, Tablero tablero) {
 		super(id, true);
@@ -52,6 +55,7 @@ public class EstrellaCasillero extends Casillero {
 		// si la estrella está acá
 		if (tieneEstrella) {
 			if (jugador.getMonedas() >= PRECIO_ESTRELLA) {
+				efecto.resetear();
 				if (true) { // Debería fijarse si el jugador decide comprarla
 					if (jugador.getMainUser().equals(jugador.getUser()))
 						venderEstrella(jugador, juego);
@@ -71,6 +75,7 @@ public class EstrellaCasillero extends Casillero {
 //
 	private void venderEstrella(Jugador jugador, String juego) {
 
+		efecto.reproducir();
 		jugador.setEstadoFinal("bueno");
 		JsonObject jo = new JsonObject();
 		JsonObject jo1 = new JsonObject();

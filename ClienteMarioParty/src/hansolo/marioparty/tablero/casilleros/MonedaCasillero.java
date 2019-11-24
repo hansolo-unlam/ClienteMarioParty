@@ -5,6 +5,8 @@ import java.awt.Graphics;
 
 import com.google.gson.JsonObject;
 
+import audio.AudioFiles;
+import audio.EfectoSonido;
 import cliente.Cliente;
 import hansolo.mario.Juego;
 import hansolo.marioparty.entidades.Jugador;
@@ -20,6 +22,7 @@ import hansolo.marioparty.ui.AdministradorUI;
  *
  */
 public class MonedaCasillero extends Casillero {
+	private EfectoSonido efecto = new EfectoSonido(AudioFiles.moneda);
 	private int cantMonedas; // positivo o negativo
 
 	public MonedaCasillero(int id, int signo) {
@@ -29,8 +32,11 @@ public class MonedaCasillero extends Casillero {
 
 	@Override
 	public void efecto(Jugador jugador, AdministradorUI administradorUI, String juego) {
-		if(this.cantMonedas>0)
+		efecto.resetear();
+		if(this.cantMonedas>0) {
 			jugador.setEstadoFinal("bueno");
+			efecto.reproducir();
+			}
 		else
 			jugador.setEstadoFinal("malo");
 		

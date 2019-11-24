@@ -28,4 +28,7 @@ public class AudioFiles {
 	
 	public static String yoshi_ready = "./recursos/audio/yoshi ready.wav";
 	
+	public static String moneda = "./recursos/audio/moneda.wav";
+	
+	public static String estrella = "./recursos/audio/estrella.wav";
 }

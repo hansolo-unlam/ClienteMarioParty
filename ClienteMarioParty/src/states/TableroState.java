@@ -184,8 +184,8 @@ public class TableroState extends State {
 		g.setColor(Color.white);
 		if (userJugador != null) {
 			g.drawString("Le toca jugar a " + userJugador, 20, 15);
-			g.drawString("Monedas de " + userJugador + ": " + tieneTurno.getMonedas(), 20, 30);
-			g.drawString("Estrellas de " + userJugador + ": " + tieneTurno.getEstrellas(), 20, 45);
+//			g.drawString("Monedas de " + userJugador + ": " + tieneTurno.getMonedas(), 20, 30);
+//			g.drawString("Estrellas de " + userJugador + ": " + tieneTurno.getEstrellas(), 20, 45);
 		}
 		g.drawString("Ronda: " + ronda, 750, 20);
 		tablero.predibujar(g);
