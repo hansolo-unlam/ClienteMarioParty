@@ -48,7 +48,7 @@ public class MusicPlayer extends Thread{
 	}
 	
 	@Override
-	public void run() {
+	public void start() {
 		reproducirSonido(this.path);
 	}
 

@@ -198,24 +198,28 @@ public class Jugador {
 
 		switch (this.numero) {
 		case 1:
-			g.drawImage(Texturas.numeros[decenas], 815, 90, 16, 16, null);
+			if (decenas > 0)
+				g.drawImage(Texturas.numeros[decenas], 815, 90, 16, 16, null);
 			g.drawImage(Texturas.numeros[unidades], 825, 90, 16, 16, null);
 			g.drawImage(Texturas.numeros[estrellas], 915, 90, 16, 16, null);
 			break;
 		case 2:
-			g.drawImage(Texturas.numeros[decenas], 815, 158, 16, 16, null);
+			if (decenas > 0)
+				g.drawImage(Texturas.numeros[decenas], 815, 158, 16, 16, null);
 			g.drawImage(Texturas.numeros[unidades], 825, 158, 16, 16, null);
 			g.drawImage(Texturas.numeros[estrellas], 915, 158, 16, 16, null);
 
 			break;
 		case 3:
-			g.drawImage(Texturas.numeros[decenas], 815, 226, 16, 16, null);
+			if (decenas > 0)
+				g.drawImage(Texturas.numeros[decenas], 815, 226, 16, 16, null);
 			g.drawImage(Texturas.numeros[unidades], 825, 226, 16, 16, null);
 			g.drawImage(Texturas.numeros[estrellas], 915, 226, 16, 16, null);
 
 			break;
 		case 4:
-			g.drawImage(Texturas.numeros[decenas], 815, 290, 16, 16, null);
+			if (decenas > 0)
+				g.drawImage(Texturas.numeros[decenas], 815, 290, 16, 16, null);
 			g.drawImage(Texturas.numeros[unidades], 825, 290, 16, 16, null);
 			g.drawImage(Texturas.numeros[estrellas], 915, 290, 16, 16, null);
 
@@ -223,6 +227,7 @@ public class Jugador {
 
 		}
 	}
+
 	public void reproducirAudios() {
 
 		if (juego.getJuegoState().getSubEstado() == EnumEstadoJuego.FIN_TURNO

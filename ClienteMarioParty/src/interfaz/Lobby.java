@@ -210,6 +210,7 @@ public class Lobby {
 		dibujarBotonesSalas(salasNombres);
 	}
 
+
 	public static void main(String[] args) {
 		new Lobby("Lobby MarioParty");
 	}
@@ -223,7 +224,6 @@ public class Lobby {
 
 	public static void setVisible() {
 		frame.setVisible(true);
-		
 	}
 
 

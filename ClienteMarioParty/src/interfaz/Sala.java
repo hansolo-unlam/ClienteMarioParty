@@ -56,7 +56,7 @@ public class Sala {
 					jo1.addProperty("user", nombreUser);
 					jo.add("data", jo1);
 					Cliente.escribirMensaje(jo.toString());
-					frame.hide();
+					frame.setVisible(false);
 					Lobby.setVisible();
 				}
 			}
@@ -91,7 +91,8 @@ public class Sala {
 				jo1.addProperty("user", nombreUser);
 				jo.add("data", jo1);
 				Cliente.escribirMensaje(jo.toString());
-				frame.hide();
+//				frame.setVisible(false);
+				frame.dispose();
 				Lobby.setVisible();
 			}
 		});
@@ -106,8 +107,9 @@ public class Sala {
 				jo.addProperty("nombre", "INICIAR_PARTIDA");
 				jo1.addProperty("sala", nombreSala);
 				jo.add("data", jo1);
-				cliente.escribirMensaje(jo.toString());
-				// System.out.println("Empezar partida");
+				Cliente.escribirMensaje(jo.toString());
+				//frame.setVisible(false);
+				btnComenzarButton.setVisible(false);
 			}
 		});
 		btnComenzarButton.setBounds(239, 216, 122, 23);
@@ -115,6 +117,12 @@ public class Sala {
 		frame.setVisible(true);
 	}
 
+	public static void salirDelJuego() {
+//		frame.setVisible(true);
+		frame.setEnabled(true);
+		frame.setFocusable(true);
+	}
+	
 	public static void setUserNames(String sala, ArrayList<String> usersEnSala) {
 		if (sala.equalsIgnoreCase(nombre)) {
 			userNames = usersEnSala;
@@ -123,7 +131,7 @@ public class Sala {
 				texto = texto + user + "\n" + "\n";
 			}
 			textPane.setText(texto);
-			// frame.repaint();
+			frame.repaint();
 		}
 	}
 
@@ -195,5 +203,12 @@ public class Sala {
 		if (juegoId.equals(nombre)) {
 			juego.compraEstrella();
 		}
+	}
+
+	public static void eliminarJugador(String juegoId, String user) {
+		if (juegoId.equals(nombre)) {
+			juego.eliminarJugador(user);
+		}
+		
 	}
 }

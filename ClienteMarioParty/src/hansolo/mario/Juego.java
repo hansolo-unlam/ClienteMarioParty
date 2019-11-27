@@ -64,7 +64,7 @@ public class Juego implements Runnable {
 		Texturas.init();
 		this.id = id;
 		this.user = user;
-		this.ventana = new Ventana();
+		this.ventana = new Ventana(this);
 		for (int i = 0; i < users.size(); i++) {
 			Jugador jugador = new Jugador(i + 1, users.get(i), this);
 			jugador.setMainUser(user);
@@ -97,7 +97,10 @@ public class Juego implements Runnable {
 
 		ejecutando = false;
 		try {
-			thread.join();
+			musicPlayer.pausar();
+			musicPlayer.join();
+			//thread.join();
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -400,6 +403,17 @@ public class Juego implements Runnable {
 		tableroState.getTieneTurno().setMonedas(tableroState.getTieneTurno().getMonedas()-30);
 		tableroState.getTieneTurno().setEstrellas(tableroState.getTieneTurno().getEstrellas()+1);
 		
+	}
+
+	public void eliminarJugador(String user) {
+		for(int i = 0; i<jugadores.size();i++) {
+			if(jugadores.get(i).getUser().equals(user))
+				jugadores.remove(i);
+		}
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

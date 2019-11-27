@@ -94,10 +94,16 @@ public class Paquete {
 			}
 			Sala.iniciarPartida(sala, jugadoresEnSala);
 			break;
+			
+		case "JUGADOR_DESCONECTADO":
+			String juego = data.get("juego").getAsString();
+			String user = data.get("user").getAsString();
+			Sala.eliminarJugador(juego, user);
+			break;
 
 		case "ESTRELLA":
 			int posicion = data.get("posicion").getAsInt();
-			String juego = data.get("juego").getAsString();
+			 juego = data.get("juego").getAsString();
 			Sala.ubicarEstrella(posicion, juego);
 			break;
 
