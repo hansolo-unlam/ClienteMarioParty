@@ -217,7 +217,7 @@ public class Texturas {
 		
 		//-----------Animaciones---------
 		
-		HojaSprites hojaDado = new HojaSprites(ImageLoader.cargarImagen("C:\\Users\\Lucas\\Pictures\\dado.png"));
+		HojaSprites hojaDado = new HojaSprites(ImageLoader.cargarImagen("recursos/texturas/dado.png"));
 		dado = new BufferedImage[6];
 		dado[0] = hojaDado.recortar(0, 0, 60, 57);
 		dado[1] = hojaDado.recortar(0, 63, 60, 57);
