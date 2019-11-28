@@ -55,24 +55,25 @@ public class Lobby {
 
 	private int cantSalas = 0;
 
-	public Lobby(String nombre) {
-		nombreUser = JOptionPane.showInputDialog("Ingresar nombre");
-
-		this.cliente = new Cliente(nombreUser);
+	public Lobby(String nombre, String nombreUser) {
+		//nombreUser = JOptionPane.showInputDialog("Ingresar nombre");
+		this.nombreUser = nombreUser;
+				
+		this.cliente = new Cliente(this.nombreUser);
 		JsonObject jo = new JsonObject();
 		JsonObject jo1 = new JsonObject();
-		jo.addProperty("nombre", "LOGIN");
-		jo1.addProperty("usuario", nombreUser);
+		jo.addProperty("nombre", "LOGIN_2");
+		jo1.addProperty("usuario", this.nombreUser);
 		jo.add("data", jo1);
 		Cliente.escribirMensaje(jo.toString());
-		
-		
+				
+				
 //		MensajeEspera mensajeEspera = new MensajeEspera();
 //		mensajeEspera.setVisible(true);
 //		new Thread(mensajeEspera).start();
 //		cliente.esperarRespuesta();
 //		mensajeEspera.stop();
-		
+				
 		//PERMITE INGRESAR AUNQUE NO TENGA PERMISO
 		//ESPERAR RESPUESTA DEL SERVIDOR - BILELLO
 		init(nombre);
@@ -210,10 +211,6 @@ public class Lobby {
 		dibujarBotonesSalas(salasNombres);
 	}
 
-
-	public static void main(String[] args) {
-		new Lobby("Lobby MarioParty");
-	}
 
 	public static void eliminarSala(String salaEliminada) {
 		salasNombres.remove(salaEliminada);

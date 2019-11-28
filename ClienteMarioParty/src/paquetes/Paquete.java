@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import hansolo.mario.Juego;
 import hansolo.marioparty.tablero.Tablero;
 import interfaz.Lobby;
+import interfaz.Login;
 import interfaz.Sala;
 
 public class Paquete {
@@ -94,16 +95,10 @@ public class Paquete {
 			}
 			Sala.iniciarPartida(sala, jugadoresEnSala);
 			break;
-			
-		case "JUGADOR_DESCONECTADO":
-			String juego = data.get("juego").getAsString();
-			String user = data.get("user").getAsString();
-			Sala.eliminarJugador(juego, user);
-			break;
 
 		case "ESTRELLA":
 			int posicion = data.get("posicion").getAsInt();
-			 juego = data.get("juego").getAsString();
+			String juego = data.get("juego").getAsString();
 			Sala.ubicarEstrella(posicion, juego);
 			break;
 
@@ -160,6 +155,15 @@ public class Paquete {
 			juego = data.get("juego").getAsString();
 			Sala.compraEstrella(juego);
 			break;
+			
+		case "LOGUEADO":
+			Login.setDatosValidos(true);
+			break;
+			
+		case "NO_LOGUEADO":
+			Login.setDatosValidos(false);
+			break;
+			
 		/*
 		 * case "ACK_INGRESAR_SALA": Sala sala2 = new Sala(nombre, cliente); break;
 		 */

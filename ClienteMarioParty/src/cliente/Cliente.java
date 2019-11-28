@@ -5,6 +5,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import javax.swing.JOptionPane;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -21,6 +23,18 @@ public class Cliente {
 	private static DataOutputStream out;
 	
 	private boolean mensajeRespondido = false;
+	
+	public Cliente() {
+		try {
+			socket = new Socket(HOST, PUERTO);
+			out = new DataOutputStream(socket.getOutputStream());
+			in = new DataInputStream(socket.getInputStream());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "No se puedo establecer conexion con el servidor", "ERROR", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			System.exit(0);
+		}
+	}
 
 	public Cliente(String nombre) {
 		this.nombre = nombre;
