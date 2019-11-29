@@ -23,13 +23,15 @@ import com.sun.glass.events.WindowEvent;
 import cliente.Cliente;
 
 public class Lobby {
-
+	public String elegido;
 	private final static int WIDHT = 140;
 	private final static int HEIGHT = 30;
 	private static int desplazamiento = HEIGHT;
 	private static int desplazamientoX = 0;
 
 	private JButton btnCrearSala;
+
+
 	private static JFrame frame = new JFrame("Lobby MarioParty");;
 	private static JPanel contentPane = new JPanel();;
 
@@ -131,12 +133,17 @@ public class Lobby {
 		contentPane.add(textPane);
 
 		btnCrearSala = new JButton("Crear nueva sala");
+		
+	
+
+	
 		btnCrearSala.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nombre = JOptionPane.showInputDialog("Ingresar nombre de la sala");
 				// creo el mensaje para el server
 				JsonObject jo = new JsonObject();
 				JsonObject jo1 = new JsonObject();
+				
 				jo.addProperty("nombre", "NUEVA_SALA");
 				jo1.addProperty("nombreSala", nombre);
 				jo1.addProperty("user", nombreUser);
@@ -144,9 +151,9 @@ public class Lobby {
 				Cliente.escribirMensaje(jo.toString());
 				frame.setVisible(false);
 				Sala sala = new Sala(nombre, cliente, nombreUser);
-			}
-
+			}	
 		});
+		
 
 		btnCrearSala.setBounds(241, 380, 160, 50);
 		contentPane.add(btnCrearSala);

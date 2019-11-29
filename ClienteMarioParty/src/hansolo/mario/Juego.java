@@ -18,6 +18,7 @@ import hansolo.marioparty.entidades.Jugador;
 import hansolo.marioparty.graficos.*;
 import hansolo.marioparty.input.MouseManager;
 import hansolo.marioparty.tablero.Tablero;
+import interfaz.Sala;
 import hansolo.marioparty.input.KeyManager;
 import states.MinijuegoState;
 import states.TableroState;
@@ -174,7 +175,14 @@ public class Juego implements Runnable {
 
 		// creo la ventana
 		// ventana = new Ventana(title, width, height);
-		background = ImageLoader.cargarImagen("recursos/texturas/background/background5.png");
+		
+		//Traigo el fondo seleccionado 
+		String fondo = interfaz.Sala.getElegido();
+		String pathFondo = "recursos/texturas/background/" +fondo+".png";
+		
+		//background = ImageLoader.cargarImagen("recursos/texturas/background/background5.png.");
+		background = ImageLoader.cargarImagen(pathFondo);
+
 		// agrego los keyListener a la ventana
 		ventana.getFrame().addKeyListener(keyManager);
 

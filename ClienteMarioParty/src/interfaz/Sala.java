@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
@@ -27,11 +29,19 @@ public class Sala {
 	private static JTextPane textPane = new JTextPane();
 	private JButton btnSalirButton;
 
+	//combo box del background
+	private JComboBox combo;
+	public static String elegido;
+	
+	
+
 	private static String nombreUser;
 	private static String nombre;
 
 	private static ArrayList<String> userNames = new ArrayList<String>();
 	private static Juego juego;
+
+
 
 	public Sala(String nombre, Cliente cliente, String userName) {
 		this.nombreUser = userName;
@@ -44,6 +54,7 @@ public class Sala {
 		frame = new JFrame(nombreSala);
 		frame.setResizable(false);
 		frame.setSize(WIDTH, HEIGHT);
+		
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -79,7 +90,43 @@ public class Sala {
 		textPane.setEditable(false);
 
 		frame.add(textPane);
+		
+		// Creo el combo box para los diferentes fondos que vamos a meter
+		combo = new JComboBox();
+		combo.addItem("background01");
+		combo.addItem("background02");
 
+		combo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				 elegido = combo.getSelectedItem().toString();
+				System.out.println("elijio este " + elegido);
+				
+			}
+		});
+		
+		combo.setBounds(241, 120, 150, 20);
+		
+		//Si el que esta en la primera posicion dentro de la sala puede modificar el comboBox
+		//caso contrario no puede verlo
+		
+		/*
+		 * COMENTADO PARA QUE TODOS LOS CLIENTES PUEDAN 
+		 * CAMBIAR FONDO A ELECCION, CUANDO LO RESUELVA POR SERVIDOR
+		 * SACO EL COMENTARIO 
+		if(cliente.getNombre().equals(userNames.get(0)) )
+		{
+			combo.setVisible(true);
+		}
+		else
+			combo.setVisible(false);
+		*/
+		
+		frame.getContentPane().add(combo);
+		
+		
 		btnSalirButton = new JButton("Salir de la sala");
 		btnSalirButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,6 +142,8 @@ public class Sala {
 				frame.dispose();
 				Lobby.setVisible();
 			}
+			
+			
 		});
 		btnSalirButton.setBounds(241, 182, 120, 23);
 		frame.add(btnSalirButton);
@@ -114,7 +163,11 @@ public class Sala {
 		});
 		btnComenzarButton.setBounds(239, 216, 122, 23);
 		frame.add(btnComenzarButton);
+		
+
 		frame.setVisible(true);
+		
+
 	}
 
 	public static void salirDelJuego() {
@@ -211,4 +264,11 @@ public class Sala {
 		}
 		
 	}
+	
+	//para pasarle el string a la clase Juego 
+	public static String getElegido() {
+		return elegido;
+	}
+
+	
 }
