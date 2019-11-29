@@ -98,6 +98,12 @@ public class Paquete {
 
 			break;
 			
+		case "CAMBIAR_MAPA":
+			String colorMapa = data.get("color").getAsString();
+			interfaz.Sala.setElegido(colorMapa);
+			break;
+			
+			
 
 		case "INICIO_PARTIDA":
 			sala = data.get("sala").getAsString();

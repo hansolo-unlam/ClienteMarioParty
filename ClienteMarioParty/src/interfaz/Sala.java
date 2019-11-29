@@ -105,10 +105,18 @@ public class Sala {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 
 				 elegido = combo.getSelectedItem().toString();
 				System.out.println("elijio este " + elegido);
-					//cliente.escribirMensaje(elegido);
+				JsonObject jo = new JsonObject();
+				JsonObject jo1 = new JsonObject();
+				jo.addProperty("nombre", "CAMBIAR_COLOR");
+				jo1.addProperty("nombreSala", nombreSala);
+				jo1.addProperty("user", nombreUser);
+				jo1.addProperty("color", elegido);
+				jo.add("data", jo1);
+				cliente.escribirMensaje(jo.toString());
 			}
 		});
 		
@@ -275,5 +283,8 @@ public class Sala {
 		return elegido;
 	}
 
+	public static void setElegido(String elegido) {
+		Sala.elegido = elegido;
+	}
 	
 }
