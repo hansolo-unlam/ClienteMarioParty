@@ -3,6 +3,7 @@ package interfaz;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataOutputStream;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -47,14 +48,14 @@ public class Sala {
 		this.nombreUser = userName;
 		this.nombre = nombre;
 		init(nombre, cliente);
-
+		this.elegido="Default";
+		//para que no tire error a los demas y carge esa
 	}
 
 	private void init(String nombreSala, Cliente cliente) {
 		frame = new JFrame(nombreSala);
 		frame.setResizable(false);
 		frame.setSize(WIDTH, HEIGHT);
-		
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -93,8 +94,12 @@ public class Sala {
 		
 		// Creo el combo box para los diferentes fondos que vamos a meter
 		combo = new JComboBox();
-		combo.addItem("background01");
-		combo.addItem("background02");
+		combo.addItem("Default");
+		combo.addItem("Azul");
+		combo.addItem("Rojo");
+		combo.addItem("Violeta");
+
+
 
 		combo.addActionListener(new ActionListener() {
 			
@@ -103,7 +108,7 @@ public class Sala {
 
 				 elegido = combo.getSelectedItem().toString();
 				System.out.println("elijio este " + elegido);
-				
+					//cliente.escribirMensaje(elegido);
 			}
 		});
 		
