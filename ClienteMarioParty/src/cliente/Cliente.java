@@ -10,11 +10,12 @@ import javax.swing.JOptionPane;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import interfaz.Login;
 import paquetes.Paquete;
 
 public class Cliente {
 	private final int PUERTO = 9000;
-	private final String HOST = "localhost";
+	private final String HOST = "192.168.0.18";
 
 	private String nombre;
 
@@ -26,7 +27,7 @@ public class Cliente {
 	
 	public Cliente() {
 		try {
-			socket = new Socket(HOST, PUERTO);
+			socket = new Socket(Login._IPSERVIDOR, Login._PUERTO);
 			out = new DataOutputStream(socket.getOutputStream());
 			in = new DataInputStream(socket.getInputStream());
 		} catch (IOException e) {
@@ -40,7 +41,7 @@ public class Cliente {
 		this.nombre = nombre;
 
 		try {
-			socket = new Socket(HOST, PUERTO);
+			socket = new Socket(Login._IPSERVIDOR, Login._PUERTO);
 			System.out.println("Se conecto " + nombre);
 			//creo un hilo para escuchar al server
 			ThreadEscucha escucha = new ThreadEscucha(socket);

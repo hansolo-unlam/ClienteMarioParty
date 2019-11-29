@@ -83,6 +83,21 @@ public class Paquete {
 			}
 			Sala.setUserNames(sala, usersEnSala);
 			break;
+			
+		case "CONTRASEÑA_INCORRECTA":
+			Lobby.errorCrearSala(cabecera);
+			break;
+			
+		case "SALA_LLENA":
+			Lobby.errorCrearSala(cabecera);
+			break;
+			
+		case "INGRESAR_SALA_OK":
+			String salaACrear = data.get("nombreSala").getAsString();
+			Lobby.crearSala(salaACrear);
+
+			break;
+			
 
 		case "INICIO_PARTIDA":
 			sala = data.get("sala").getAsString();

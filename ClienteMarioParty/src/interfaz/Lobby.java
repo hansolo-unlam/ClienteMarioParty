@@ -133,17 +133,24 @@ public class Lobby {
 		btnCrearSala = new JButton("Crear nueva sala");
 		btnCrearSala.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String contraseña = ""; //NUEVO
 				String nombre = JOptionPane.showInputDialog("Ingresar nombre de la sala");
+				if(JOptionPane.showConfirmDialog(frame, "¿Desea hacer la sala privada?", "Sala privada", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) { //NUEVO
+					contraseña = JOptionPane.showInputDialog("Ingrese la contraseña de la sala"); //NUEVO
+					nombre += "*"; //NUEVO
+				}
+				
 				// creo el mensaje para el server
 				JsonObject jo = new JsonObject();
 				JsonObject jo1 = new JsonObject();
 				jo.addProperty("nombre", "NUEVA_SALA");
 				jo1.addProperty("nombreSala", nombre);
+				jo1.addProperty("pass", contraseña); //NUEVO
 				jo1.addProperty("user", nombreUser);
 				jo.add("data", jo1);
 				Cliente.escribirMensaje(jo.toString());
 				frame.setVisible(false);
-				Sala sala = new Sala(nombre, cliente, nombreUser);
+				Sala sala = new Sala(nombre, cliente, nombreUser); //MODIFICADO
 			}
 
 		});
@@ -183,18 +190,24 @@ public class Lobby {
 
 			btnsSala.get(cont - 1).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					String contraseña = ""; //NUEVO
+					if(nombre.contains("*")) //NUEVO
+						contraseña = JOptionPane.showInputDialog("Ingrese contraseña de la sala"); //NUEVO
+					
 					System.out.println("Ingresar a la sala");
 					JsonObject jo = new JsonObject();
 					JsonObject jo1 = new JsonObject();
 					jo.addProperty("nombre", "INGRESAR_SALA");
 					jo1.addProperty("salaSolicitada", nombre);
+					jo1.addProperty("pass", contraseña);
 					jo1.addProperty("user", nombreUser);
 					jo.add("data", jo1);
 					Cliente.escribirMensaje(jo.toString());
 					
-					//ESPERAR RESPUESTA DEL SERVIDOR - BILELLO
-					frame.setVisible(false);
-					Sala sala2 = new Sala(nombre, cliente, nombreUser);
+					
+					//frame.setVisible(false);
+					//Sala sala2 = new Sala(nombre, cliente, nombreUser);
+					
 				}
 			});
 
@@ -222,6 +235,17 @@ public class Lobby {
 	public static void setVisible() {
 		frame.setVisible(true);
 	}
-
+	
+	public static void crearSala(String nombre) { //NUEVO
+		//ESPERAR RESPUESTA DEL SERVIDOR - BILELLO
+		frame.setVisible(false);
+		Sala sala2 = new Sala(nombre, cliente, nombreUser);
+		
+	}
+	
+	public static void errorCrearSala(String mensaje) {
+		JOptionPane.showMessageDialog(frame, "¡No se pudo crear la sala!\nMOTIVO: " + mensaje, "Error al crear la sala", JOptionPane.ERROR_MESSAGE);
+	}
+	
 
 }

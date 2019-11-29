@@ -30,6 +30,10 @@ public class Login extends JFrame {
 	private JTextField usuario;
 	private static Login frame;
 	
+	
+	public static String _IPSERVIDOR; // PERDON PROFE
+	public static int _PUERTO; // IDEM ANTERIOR
+	
 	private static boolean datosValidos;
 	private Cliente cliente;
 	private JPasswordField contraseña;
@@ -42,6 +46,13 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					if(args.length == 0)
+						for (String string : args) 
+							JOptionPane.showMessageDialog(null, string);
+					else
+						JOptionPane.showMessageDialog(null, "SIN ARGUMENTOS");
+					_IPSERVIDOR = "localhost"; //args[0];
+					_PUERTO = 9000; //Integer.parseInt(args[1]);
 					frame = new Login();
 					frame.setVisible(true);
 				} catch (Exception e) {
