@@ -164,6 +164,13 @@ public class Paquete {
 			Login.setDatosValidos(false);
 			break;
 			
+			
+		case "CAMBIAR_MAPA":
+			String colorMapa = data.get("color").getAsString();
+			interfaz.Sala.setElegido(colorMapa);
+			break;
+			
+			
 		/*
 		 * case "ACK_INGRESAR_SALA": Sala sala2 = new Sala(nombre, cliente); break;
 		 */

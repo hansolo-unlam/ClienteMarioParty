@@ -34,6 +34,7 @@ public class Sala {
 	private JComboBox combo;
 	public static String elegido;
 	
+
 	
 
 	private static String nombreUser;
@@ -93,41 +94,37 @@ public class Sala {
 		frame.add(textPane);
 		
 		// Creo el combo box para los diferentes fondos que vamos a meter
+		
 		combo = new JComboBox();
 		combo.addItem("Default");
 		combo.addItem("Azul");
 		combo.addItem("Rojo");
 		combo.addItem("Violeta");
-
-
-
 		combo.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				 elegido = combo.getSelectedItem().toString();
-				System.out.println("elijio este " + elegido);
-					//cliente.escribirMensaje(elegido);
+				 	JsonObject jo = new JsonObject();
+					JsonObject jo1 = new JsonObject();
+					jo.addProperty("nombre", "CAMBIAR_COLOR");
+					jo1.addProperty("nombreSala", nombreSala);
+					jo1.addProperty("user", nombreUser);
+					jo1.addProperty("color", elegido);
+					jo.add("data", jo1);
+					if(nombreUser.equals(userNames.get(0)))
+					{
+						Cliente.escribirMensaje(jo.toString());
+
+					}
 			}
 		});
 		
+		combo.setVisible(false);
+
+		
 		combo.setBounds(241, 120, 150, 20);
-		
-		//Si el que esta en la primera posicion dentro de la sala puede modificar el comboBox
-		//caso contrario no puede verlo
-		
-		/*
-		 * COMENTADO PARA QUE TODOS LOS CLIENTES PUEDAN 
-		 * CAMBIAR FONDO A ELECCION, CUANDO LO RESUELVA POR SERVIDOR
-		 * SACO EL COMENTARIO 
-		if(cliente.getNombre().equals(userNames.get(0)) )
-		{
-			combo.setVisible(true);
-		}
-		else
-			combo.setVisible(false);
-		*/
 		
 		frame.getContentPane().add(combo);
 		
@@ -273,6 +270,10 @@ public class Sala {
 	//para pasarle el string a la clase Juego 
 	public static String getElegido() {
 		return elegido;
+	}
+	
+	public static void setElegido(String elegido) {
+		Sala.elegido = elegido;
 	}
 
 	
